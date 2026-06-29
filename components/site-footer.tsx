@@ -26,9 +26,12 @@ export function SiteFooter() {
                 </span>
               </span>
             </a>
-            <p className="mt-5 max-w-md text-sm leading-6 text-muted-foreground">
-              novary.dev - prodotti digitali premium per aziende, brand e
-              professionisti che vogliono distinguersi online.
+            <p className="mt-5 max-w-xs text-sm leading-6 text-muted-foreground">
+              Prodotti digitali premium per aziende, brand e professionisti che
+              vogliono distinguersi online.
+            </p>
+            <p className="mt-4 text-xs text-muted-foreground/50">
+              © 2026 Novary. Tutti i diritti riservati.
             </p>
           </div>
           <nav className="flex flex-wrap gap-5" aria-label="Navigazione footer">

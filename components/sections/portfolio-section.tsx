@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 import { SectionHeading } from "@/components/section-heading";
-import { StaggerContainer, StaggerItem } from "@/components/fade-in";
+import { FadeIn, StaggerContainer, StaggerItem } from "@/components/fade-in";
 import {
   ProjectLogo,
   type ProjectLogoVariant
@@ -30,7 +30,7 @@ type PortfolioProject = {
   logo: ProjectLogoVariant;
 };
 
-const projects: PortfolioProject[] = [
+const caseStudies: PortfolioProject[] = [
   {
     name: "Cutly",
     type: "Case study",
@@ -38,7 +38,7 @@ const projects: PortfolioProject[] = [
     description:
       "Piattaforma premium per prenotare servizi, professionisti, giorno e orario con un flusso guidato.",
     outcome:
-      "Meno telefonate ripetitive, agenda piu ordinata e un'esperienza cliente piu fluida da mobile.",
+      "Meno telefonate ripetitive, agenda più ordinata e un'esperienza cliente più fluida da mobile.",
     tags: ["Booking", "Calendario", "Demo interattiva"],
     href: "/portfolio/cutly",
     preview: "cutly",
@@ -51,12 +51,15 @@ const projects: PortfolioProject[] = [
     description:
       "E-commerce editoriale per abbigliamento, scarpe e accessori, con filtro categorie, vista rapida e carrello.",
     outcome:
-      "Catalogo piu leggibile, presentazione prodotto piu elegante e acquisto piu diretto da smartphone.",
+      "Catalogo più leggibile, presentazione prodotto più elegante e acquisto più diretto da smartphone.",
     tags: ["E-commerce", "Fashion", "Carrello"],
     href: "/portfolio/veyra",
     preview: "veyra",
     logo: "veyra"
-  },
+  }
+];
+
+const concepts: PortfolioProject[] = [
   {
     name: "Studio professionale",
     type: "Concept",
@@ -64,8 +67,8 @@ const projects: PortfolioProject[] = [
     description:
       "Una struttura premium per uno studio locale che deve comunicare fiducia, servizi e richiesta di contatto.",
     outcome:
-      "Obiettivo: aumentare la qualita delle richieste e rendere il brand piu autorevole online.",
-    tags: ["Sito aziendale", "Esperienza mobile", "SEO locale"],
+      "Obiettivo: aumentare la qualità delle richieste e rendere il brand più autorevole online.",
+    tags: ["Sito aziendale", "SEO locale"],
     logo: "studio"
   },
   {
@@ -73,10 +76,10 @@ const projects: PortfolioProject[] = [
     type: "Concept",
     category: "Vendita online",
     description:
-      "Un percorso di acquisto essenziale per un'attivita che vuole vendere prodotti selezionati con chiarezza.",
+      "Un percorso di acquisto essenziale per un'attività che vuole vendere prodotti selezionati con chiarezza.",
     outcome:
       "Obiettivo: rendere semplice la scoperta del prodotto e ridurre le frizioni prima dell'acquisto.",
-    tags: ["Catalogo", "Checkout", "Prodotto"],
+    tags: ["Catalogo", "Checkout"],
     logo: "commerce"
   },
   {
@@ -84,10 +87,10 @@ const projects: PortfolioProject[] = [
     type: "Concept",
     category: "Automazione AI",
     description:
-      "Un flusso dimostrativo per raccogliere richieste, qualificarle e preparare risposte operative piu rapide.",
+      "Un flusso dimostrativo per raccogliere richieste, qualificarle e preparare risposte operative più rapide.",
     outcome:
-      "Obiettivo: meno lavoro manuale, dati piu ordinati e tempi di risposta piu competitivi.",
-    tags: ["AI", "Lead flow", "Pannello operativo"],
+      "Obiettivo: meno lavoro manuale, dati più ordinati e tempi di risposta più competitivi.",
+    tags: ["AI", "Lead flow"],
     logo: "automation"
   }
 ];
@@ -167,45 +170,14 @@ function MockupPreview({
     );
   }
 
-  return (
-    <div
-      className="relative h-56 overflow-hidden rounded-lg border border-white/10 bg-black transition-transform duration-500 ease-out-expo group-hover:scale-[1.02]"
-      aria-hidden="true"
-    >
-      <div className="absolute inset-0 surface-grid opacity-70" />
-      <div className="absolute left-5 top-5">
-        <ProjectLogo variant={logo} size="sm" />
-      </div>
-      <div className="absolute right-4 top-4 rounded-md border border-white/10 bg-black/30 p-1">
-        <ProjectLogo variant={logo} size="sm" markOnly />
-      </div>
-      <div className="absolute left-5 top-20 h-20 w-36 rounded-md border border-white/10 bg-white/[0.04]">
-        <div className="m-4 h-3 w-16 rounded-sm bg-primary/70" />
-        <div className="mx-4 mt-3 h-2 w-24 rounded-sm bg-white/20" />
-        <div className="mx-4 mt-2 h-2 w-14 rounded-sm bg-white/10" />
-      </div>
-      <div className="absolute bottom-5 left-5 right-5 grid grid-cols-4 gap-2">
-        {Array.from({ length: 8 }).map((_, itemIndex) => (
-          <div
-            key={`${index}-${itemIndex}`}
-            className="h-8 rounded-sm border border-white/10 bg-white/[0.035]"
-          >
-            <div
-              className="mx-2 mt-3 h-1.5 rounded-sm bg-primary/70"
-              style={{ width: `${32 + ((itemIndex + index) % 4) * 14}%` }}
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+  return null;
 }
 
-function ProjectCard({
+function CaseStudyCard({
   project,
   index
 }: {
-  project: (typeof projects)[number];
+  project: PortfolioProject;
   index: number;
 }) {
   const content = (
@@ -213,7 +185,6 @@ function ProjectCard({
       className="group relative h-full overflow-hidden bg-white/[0.03] transition-[transform,border-color,background-color,box-shadow] duration-200 ease-out-expo hover:-translate-y-px hover:border-primary/25 hover:bg-white/[0.052] hover:shadow-[0_28px_100px_rgba(109,74,255,0.13)]"
       onMouseMove={onMouseMove}
     >
-      {/* Mouse-tracking glow */}
       <div
         className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         style={{
@@ -221,7 +192,6 @@ function ProjectCard({
             "radial-gradient(320px circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(109,74,255,0.11), transparent 70%)"
         }}
       />
-
       <MockupPreview index={index} variant={project.preview} logo={project.logo} />
       <CardHeader>
         <div className="flex items-center justify-between gap-4">
@@ -241,7 +211,7 @@ function ProjectCard({
         <p className="text-sm font-medium leading-6 text-foreground">
           {project.outcome}
         </p>
-        <div className="mt-5 flex flex-wrap gap-2">
+        <div className="mt-4 flex flex-wrap gap-2">
           {project.tags.map((tag) => (
             <span
               key={tag}
@@ -251,26 +221,55 @@ function ProjectCard({
             </span>
           ))}
         </div>
-        <p className="mt-6 text-sm font-medium text-primary">
-          {project.href ? "Apri case study" : "Concept esplorativo"}
-        </p>
+        <p className="mt-5 text-sm font-medium text-primary">Apri case study</p>
       </CardContent>
     </Card>
   );
 
-  if (project.href) {
-    return (
-      <Link
-        href={project.href}
-        className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-        aria-label={`Apri il progetto ${project.name}`}
-      >
-        {content}
-      </Link>
-    );
-  }
+  return (
+    <Link
+      href={project.href!}
+      className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      aria-label={`Apri il progetto ${project.name}`}
+    >
+      {content}
+    </Link>
+  );
+}
 
-  return content;
+function ConceptCard({ project }: { project: PortfolioProject }) {
+  return (
+    <Card className="group relative h-full overflow-hidden bg-white/[0.018] transition-[border-color,background-color] duration-200 ease-out-expo hover:border-white/20 hover:bg-white/[0.03]">
+      <CardHeader className="pb-4">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.035]">
+            <ProjectLogo variant={project.logo} size="sm" markOnly />
+          </div>
+          <Badge variant="secondary">{project.category}</Badge>
+        </div>
+        <CardTitle className="mt-2 text-base">{project.name}</CardTitle>
+        <CardDescription>{project.description}</CardDescription>
+      </CardHeader>
+      <CardContent className="border-t border-white/10 pt-4">
+        <p className="text-xs leading-5 text-muted-foreground/80">
+          {project.outcome}
+        </p>
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded border border-white/10 px-2 py-0.5 text-[11px] text-muted-foreground/70"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+        <p className="mt-4 text-xs font-medium text-muted-foreground">
+          Concept esplorativo
+        </p>
+      </CardContent>
+    </Card>
+  );
 }
 
 export function PortfolioSection() {
@@ -282,14 +281,29 @@ export function PortfolioSection() {
           title="Case study pensati per mostrare come Novary costruisce prodotti digitali."
         >
           Progetti dimostrativi, non clienti reali: ogni concept mostra problema,
-          soluzione, funzionalita, stack tecnico e demo interattiva con un taglio
+          soluzione, funzionalità, stack tecnico e demo interattiva con un taglio
           vicino a un prodotto pronto per il mercato.
         </SectionHeading>
 
-        <StaggerContainer className="mt-14 grid gap-5 lg:grid-cols-3">
-          {projects.map((project, index) => (
+        {/* Featured case studies */}
+        <StaggerContainer className="mt-14 grid gap-5 md:grid-cols-2">
+          {caseStudies.map((project, index) => (
             <StaggerItem key={project.name}>
-              <ProjectCard project={project} index={index} />
+              <CaseStudyCard project={project} index={index} />
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+
+        {/* Concept explorations */}
+        <FadeIn>
+          <p className="mt-10 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground/50">
+            Concept esplorativi
+          </p>
+        </FadeIn>
+        <StaggerContainer className="mt-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {concepts.map((project) => (
+            <StaggerItem key={project.name}>
+              <ConceptCard project={project} />
             </StaggerItem>
           ))}
         </StaggerContainer>

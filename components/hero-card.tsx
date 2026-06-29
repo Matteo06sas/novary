@@ -1,10 +1,11 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
 
 export function HeroCard({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
 
@@ -13,7 +14,7 @@ export function HeroCard({ children }: { children: React.ReactNode }) {
   const rotateY = useSpring(useTransform(mouseX, [0, 1], [-6, 6]), spring);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
+    if (shouldReduceMotion || !ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     mouseX.set((e.clientX - rect.left) / rect.width);
     mouseY.set((e.clientY - rect.top) / rect.height);
@@ -28,7 +29,7 @@ export function HeroCard({ children }: { children: React.ReactNode }) {
     <div style={{ perspective: "1100px" }}>
       <motion.div
         ref={ref}
-        style={{ rotateX, rotateY }}
+        style={shouldReduceMotion ? undefined : { rotateX, rotateY }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
       >
