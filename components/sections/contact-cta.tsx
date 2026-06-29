@@ -10,7 +10,7 @@ export function ContactCta() {
         <FadeIn className="relative mx-auto max-w-5xl overflow-hidden rounded-lg border border-white/10 bg-white/[0.035] p-8 text-center shadow-[0_36px_140px_rgba(0,0,0,0.5)] sm:p-12">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(109,74,255,0.18),transparent_38%)]" />
           <div className="relative">
-            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 text-primary">
+            <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 text-primary transition-transform duration-300 ease-out-expo hover:scale-110">
               <Mail aria-hidden="true" className="h-5 w-5" />
             </div>
             <h2 className="mx-auto mt-7 max-w-3xl text-balance text-4xl font-semibold leading-[1.02] text-foreground sm:text-6xl">
@@ -26,7 +26,7 @@ export function ContactCta() {
                 (item) => (
                   <div
                     key={item}
-                    className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-sm text-muted-foreground"
+                    className="rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-sm text-muted-foreground transition-[border-color,background-color,color] duration-150 ease-out-expo hover:border-primary/20 hover:bg-primary/[0.06] hover:text-foreground"
                   >
                     {item}
                   </div>

@@ -49,7 +49,7 @@ export function ProcessSection() {
           <StaggerContainer className="grid gap-4">
             {steps.map((item) => (
               <StaggerItem key={item.step}>
-                <div className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.028] p-5 transition-all duration-300 hover:border-primary/30 hover:bg-white/[0.05] sm:grid-cols-[5rem_1fr]">
+                <div className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.028] p-5 transition-[border-color,background-color] duration-200 ease-out-expo hover:border-primary/25 hover:bg-white/[0.05] sm:grid-cols-[5rem_1fr]">
                   <div>
                     <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 text-sm font-semibold text-primary">
                       {item.step}

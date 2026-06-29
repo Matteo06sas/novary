@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
@@ -90,6 +92,13 @@ const projects: PortfolioProject[] = [
   }
 ];
 
+function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+  const el = e.currentTarget;
+  const rect = el.getBoundingClientRect();
+  el.style.setProperty("--glow-x", `${e.clientX - rect.left}px`);
+  el.style.setProperty("--glow-y", `${e.clientY - rect.top}px`);
+}
+
 function MockupPreview({
   index,
   variant,
@@ -102,7 +111,7 @@ function MockupPreview({
   if (variant === "veyra") {
     return (
       <div
-        className="relative h-56 overflow-hidden rounded-lg border border-white/10 bg-white"
+        className="relative h-56 overflow-hidden rounded-lg border border-white/10 bg-white transition-transform duration-500 ease-out-expo group-hover:scale-[1.02]"
         aria-hidden="true"
       >
         <div className="absolute inset-0 bg-[linear-gradient(90deg,#f7f5f0_0%,#f7f5f0_52%,#111111_52%,#111111_100%)]" />
@@ -126,7 +135,7 @@ function MockupPreview({
   if (variant === "cutly") {
     return (
       <div
-        className="relative h-56 overflow-hidden rounded-lg border border-white/10 bg-[#0b0907]"
+        className="relative h-56 overflow-hidden rounded-lg border border-white/10 bg-[#0b0907] transition-transform duration-500 ease-out-expo group-hover:scale-[1.02]"
         aria-hidden="true"
       >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(109,74,255,0.24),transparent_28%),linear-gradient(135deg,#17120d_0%,#050505_74%)]" />
@@ -160,7 +169,7 @@ function MockupPreview({
 
   return (
     <div
-      className="relative h-56 overflow-hidden rounded-lg border border-white/10 bg-black"
+      className="relative h-56 overflow-hidden rounded-lg border border-white/10 bg-black transition-transform duration-500 ease-out-expo group-hover:scale-[1.02]"
       aria-hidden="true"
     >
       <div className="absolute inset-0 surface-grid opacity-70" />
@@ -200,7 +209,19 @@ function ProjectCard({
   index: number;
 }) {
   const content = (
-    <Card className="group h-full overflow-hidden bg-white/[0.03] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-white/[0.052] hover:shadow-[0_28px_100px_rgba(109,74,255,0.13)]">
+    <Card
+      className="group relative h-full overflow-hidden bg-white/[0.03] transition-[transform,border-color,background-color,box-shadow] duration-200 ease-out-expo hover:-translate-y-px hover:border-primary/25 hover:bg-white/[0.052] hover:shadow-[0_28px_100px_rgba(109,74,255,0.13)]"
+      onMouseMove={onMouseMove}
+    >
+      {/* Mouse-tracking glow */}
+      <div
+        className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background:
+            "radial-gradient(320px circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(109,74,255,0.11), transparent 70%)"
+        }}
+      />
+
       <MockupPreview index={index} variant={project.preview} logo={project.logo} />
       <CardHeader>
         <div className="flex items-center justify-between gap-4">
@@ -210,7 +231,7 @@ function ProjectCard({
           </div>
           <ArrowUpRight
             aria-hidden="true"
-            className="h-4 w-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+            className="h-4 w-4 flex-none text-muted-foreground transition-[transform,color] duration-150 ease-out-expo group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
           />
         </div>
         <CardTitle>{project.name}</CardTitle>

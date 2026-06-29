@@ -36,7 +36,7 @@ export function SiteFooter() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="relative text-sm text-muted-foreground transition-colors duration-150 ease-out-expo hover:text-foreground after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0 after:bg-foreground/50 after:transition-[width] after:duration-200 after:ease-out-expo hover:after:w-full"
               >
                 {item.label}
               </a>

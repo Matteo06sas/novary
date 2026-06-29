@@ -4,6 +4,7 @@ import { HeroSection } from "@/components/sections/hero-section";
 import { PortfolioSection } from "@/components/sections/portfolio-section";
 import { ProcessSection } from "@/components/sections/process-section";
 import { ServicesSection } from "@/components/sections/services-section";
+import { Marquee } from "@/components/marquee";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
@@ -13,6 +14,7 @@ export default function Home() {
       <SiteHeader />
       <main>
         <HeroSection />
+        <Marquee />
         <ServicesSection />
         <PortfolioSection />
         <ProcessSection />
