@@ -1,7 +1,7 @@
 const footerLinks = [
-  { label: "Servizi", href: "#services" },
-  { label: "Lavori", href: "#work" },
-  { label: "Processo", href: "#process" },
+  { label: "Servizi", href: "/#services" },
+  { label: "Lavori", href: "/#work" },
+  { label: "Processo", href: "/#process" },
   { label: "Contatti", href: "mailto:hello@novary.dev" }
 ];
 

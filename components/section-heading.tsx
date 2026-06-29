@@ -25,10 +25,10 @@ export function SectionHeading({
       }
     >
       <Badge variant="outline">{eyebrow}</Badge>
-      <h2 className="mt-5 text-3xl font-semibold text-foreground sm:text-4xl">
+      <h2 className="mt-5 text-balance text-3xl font-semibold leading-tight text-foreground sm:text-4xl">
         {title}
       </h2>
-      <p className="mt-4 text-base leading-7 text-muted-foreground sm:text-lg">
+      <p className="mt-4 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
         {children}
       </p>
     </FadeIn>

@@ -5,26 +5,30 @@ const steps = [
   {
     step: "01",
     title: "Analisi",
+    label: "Direzione strategica",
     description:
-      "Comprendiamo obiettivi, pubblico, servizi e priorità commerciali per definire una direzione chiara."
+      "Allineiamo obiettivi, pubblico, offerta e priorità commerciali per capire cosa deve davvero ottenere il sito."
   },
   {
     step: "02",
     title: "Progettazione",
+    label: "Struttura e identità",
     description:
-      "Trasformiamo la strategia in struttura, contenuti e interfacce essenziali, eleganti e facili da usare."
+      "Definiamo architettura, contenuti e direzione visiva con un'interfaccia essenziale, leggibile e coerente."
   },
   {
     step: "03",
     title: "Sviluppo",
+    label: "Performance e dettagli",
     description:
-      "Realizziamo il sito con componenti puliti, performance solide, attenzione al mobile e dettagli pronti per la pubblicazione."
+      "Costruiamo componenti puliti, pagine responsive e una base tecnica veloce, solida e pronta per crescere."
   },
   {
     step: "04",
     title: "Consegna",
+    label: "Lancio e prossimi passi",
     description:
-      "Pubblichiamo il progetto, verifichiamo gli elementi essenziali e ti consegniamo una base digitale chiara da far evolvere."
+      "Prepariamo la pubblicazione, controlliamo gli elementi critici e condividiamo indicazioni chiare per evolvere."
   }
 ];
 
@@ -35,7 +39,7 @@ export function ProcessSection() {
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <SectionHeading
             eyebrow="Processo"
-            title="Un percorso chiaro dall'idea alla pubblicazione."
+            title="Un metodo ordinato, pensato per arrivare online con sicurezza."
           >
             Novary mantiene il lavoro snello e trasparente, con decisioni
             guidate dagli obiettivi reali della tua attività.
@@ -44,11 +48,16 @@ export function ProcessSection() {
           <StaggerContainer className="grid gap-4">
             {steps.map((item) => (
               <StaggerItem key={item.step}>
-                <div className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.025] p-5 sm:grid-cols-[5rem_1fr]">
-                  <div className="text-sm font-semibold text-primary">
-                    {item.step}
+                <div className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.025] p-5 transition-colors hover:border-white/20 hover:bg-white/[0.04] sm:grid-cols-[5rem_1fr]">
+                  <div>
+                    <div className="flex h-12 w-12 items-center justify-center rounded-md border border-primary/25 bg-primary/10 text-sm font-semibold text-primary">
+                      {item.step}
+                    </div>
                   </div>
                   <div>
+                    <p className="text-xs font-medium uppercase text-primary">
+                      {item.label}
+                    </p>
                     <h3 className="text-xl font-semibold text-foreground">
                       {item.title}
                     </h3>
