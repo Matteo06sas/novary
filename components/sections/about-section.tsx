@@ -2,9 +2,10 @@ import { CheckCircle2 } from "lucide-react";
 
 import { SectionHeading } from "@/components/section-heading";
 import { FadeIn } from "@/components/fade-in";
+import { NovaryLogo } from "@/components/novary-logo";
 
 const principles = [
-  "Un design premium deve rendere l'attività più chiara, non più complessa.",
+  "Un design premium rende l'attività più chiara, non più complessa.",
   "La tecnologia ha valore quando migliora l'esperienza del cliente e fa risparmiare tempo.",
   "Performance, usabilità e manutenzione devono essere presenti fin dalla prima versione.",
   "Testi chiari e percorsi semplici aiutano il visitatore a fidarsi e a contattarti."
@@ -12,40 +13,29 @@ const principles = [
 
 export function AboutSection() {
   return (
-    <section id="about" className="border-b border-white/10 bg-background py-24">
+    <section id="about" className="border-b border-white/10 bg-background py-28">
       <div className="section-shell">
         <div className="grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:items-start">
           <SectionHeading
             eyebrow="Studio"
-            title="Esperienze digitali moderne, progettate per crescere."
+            title="Un piccolo studio digitale con standard da prodotto premium."
           >
-            Novary sviluppa esperienze digitali moderne per aziende locali e
-            professionisti, con un focus concreto su performance, usabilità e
-            crescita del business.
+            Novary sviluppa esperienze digitali moderne per aziende, brand e
+            professionisti che vogliono una presenza online più curata,
+            memorabile e concreta.
           </SectionHeading>
 
-          <FadeIn className="rounded-lg border border-white/10 bg-white/[0.025] p-6">
-            <p className="text-base leading-7 text-muted-foreground">
+          <FadeIn className="overflow-hidden rounded-lg border border-white/10 bg-white/[0.028] p-6 shadow-[0_24px_100px_rgba(0,0,0,0.22)]">
+            <div className="grid place-items-center rounded-lg border border-white/10 bg-black/45 px-7 py-8">
+              <NovaryLogo variant="wordmark" className="w-full max-w-[520px]" />
+            </div>
+            <p className="mt-6 text-base leading-7 text-muted-foreground">
               Ogni progetto nasce da una lettura attenta degli obiettivi e
               diventa un sistema digitale essenziale, veloce e coerente con il
-              posizionamento dell’attività. L’obiettivo è costruire strumenti
+              posizionamento dell&apos;attività. L&apos;obiettivo è costruire strumenti
               belli da vedere, semplici da usare e utili per generare nuove
               opportunità.
             </p>
-            <div className="mt-6 grid grid-cols-2 gap-4 border-t border-white/10 pt-6">
-              <div>
-                <p className="text-3xl font-semibold text-foreground">01</p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  studio focalizzato
-                </p>
-              </div>
-              <div>
-                <p className="text-3xl font-semibold text-foreground">100%</p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  strategia su misura
-                </p>
-              </div>
-            </div>
           </FadeIn>
         </div>
 
@@ -53,7 +43,7 @@ export function AboutSection() {
           {principles.map((principle) => (
             <FadeIn
               key={principle}
-              className="flex gap-4 rounded-lg border border-white/10 bg-white/[0.025] p-5"
+              className="flex gap-4 rounded-lg border border-white/10 bg-white/[0.028] p-5 transition-colors hover:border-primary/25 hover:bg-white/[0.05]"
             >
               <CheckCircle2
                 aria-hidden="true"

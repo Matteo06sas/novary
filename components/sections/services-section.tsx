@@ -22,84 +22,84 @@ type Service = {
   title: string;
   description: string;
   icon: LucideIcon;
-  points: string[];
   signal: string;
+  points: string[];
 };
 
 const services: Service[] = [
   {
-    title: "Siti Web Aziendali",
+    title: "Siti web premium",
     description:
-      "Siti istituzionali moderni, chiari e autorevoli per presentare la tua attività nel modo giusto.",
+      "Presenze digitali veloci, autorevoli e progettate per trasformare la prima impressione in fiducia.",
     icon: Code2,
-    signal: "Credibilità",
-    points: ["Progetto visivo su misura", "Struttura per ogni dispositivo", "Testi orientati alla fiducia"]
+    signal: "Identità",
+    points: ["Design su misura", "Copy chiaro", "Performance curate"]
   },
   {
     title: "E-commerce",
     description:
-      "Esperienze di acquisto essenziali, veloci e curate per vendere online con una presenza professionale.",
+      "Esperienze di acquisto eleganti, con cataloghi ordinati e percorsi semplici dal prodotto al contatto.",
     icon: ShoppingCart,
     signal: "Vendita",
-    points: ["Cataloghi ordinati", "Percorsi di acquisto chiari", "Base pronta per crescere"]
+    points: ["Catalogo leggibile", "Schede prodotto premium", "Carrello intuitivo"]
   },
   {
-    title: "Landing Page",
+    title: "Landing page",
     description:
-      "Pagine focalizzate su campagne, servizi o lanci, progettate per trasformare l'attenzione in contatti.",
+      "Pagine focalizzate su campagne, servizi o lanci, con gerarchia visiva e CTA senza attrito.",
     icon: LayoutTemplate,
     signal: "Conversione",
-    points: ["Messaggio diretto", "CTA visibili", "Sezioni ottimizzate per conversione"]
+    points: ["Messaggio diretto", "Sezioni essenziali", "CTA visibili"]
   },
   {
     title: "Automazioni AI",
     description:
-      "Flussi intelligenti per ridurre attività ripetitive, migliorare i tempi di risposta e gestire meglio i contatti.",
+      "Flussi pratici per qualificare contatti, ridurre lavoro ripetitivo e accelerare le risposte.",
     icon: Bot,
     signal: "Efficienza",
-    points: ["Qualifica contatti", "Risposte assistite", "Processi interni più fluidi"]
+    points: ["Qualifica lead", "Risposte assistite", "Processi più fluidi"]
   },
   {
     title: "Manutenzione",
     description:
-      "Supporto continuativo per mantenere il sito sicuro, aggiornato e coerente con l'evoluzione del business.",
+      "Supporto continuativo per mantenere il prodotto stabile, aggiornato e coerente con il brand.",
     icon: Wrench,
     signal: "Continuità",
-    points: ["Aggiornamenti tecnici", "Controlli periodici", "Piccole evoluzioni"]
+    points: ["Controlli periodici", "Aggiornamenti", "Evoluzioni mirate"]
   },
   {
-    title: "Ottimizzazione SEO",
+    title: "SEO tecnica",
     description:
-      "Struttura, contenuti e performance pensati per migliorare la visibilità online e intercettare clienti locali.",
+      "Struttura, contenuti e velocità pensati per rendere il sito più leggibile anche dai motori di ricerca.",
     icon: SearchCheck,
     signal: "Visibilità",
-    points: ["SEO tecnica", "Contenuti strategici", "Performance e indicizzazione"]
+    points: ["Struttura pulita", "Performance", "Indicizzazione"]
   }
 ];
 
 export function ServicesSection() {
   return (
-    <section id="services" className="surface-grid border-b border-white/10 py-24">
+    <section id="services" className="border-b border-white/10 bg-[#050506] py-28">
       <div className="section-shell">
         <SectionHeading
           eyebrow="Servizi"
-          title="Tutto ciò che serve per una presenza digitale moderna, solida e credibile."
+          title="Design, sviluppo e strategia per prodotti digitali che sembrano premium."
         >
-          Novary unisce design essenziale, sviluppo affidabile e strumenti
-          intelligenti per aiutare aziende locali e professionisti a crescere
-          online.
+          Novary costruisce esperienze digitali con una direzione chiara: meno
+          rumore, più precisione, più fiducia nel momento in cui un potenziale
+          cliente arriva sul sito.
         </SectionHeading>
 
-        <StaggerContainer className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <StaggerContainer className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => {
             const Icon = service.icon;
 
             return (
               <StaggerItem key={service.title}>
-                <Card className="group h-full overflow-hidden bg-black/72 backdrop-blur transition-colors hover:border-white/20 hover:bg-white/[0.045]">
+                <Card className="group h-full overflow-hidden bg-white/[0.028] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-white/[0.05] hover:shadow-[0_24px_80px_rgba(109,74,255,0.12)]">
                   <CardHeader>
                     <div className="flex items-start justify-between gap-4">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-md border border-primary/25 bg-primary/10 text-primary shadow-[0_0_28px_rgba(0,122,255,0.12)]">
+                      <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 text-primary">
                         <Icon aria-hidden="true" className="h-5 w-5" />
                       </div>
                       <span className="text-xs font-medium text-muted-foreground">

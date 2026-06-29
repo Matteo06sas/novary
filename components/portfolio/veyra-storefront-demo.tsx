@@ -13,6 +13,7 @@ import {
   X
 } from "lucide-react";
 
+import { ProjectLogo } from "@/components/project-logo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -191,13 +192,16 @@ export function VeyraStorefrontDemo() {
     <div className="overflow-hidden rounded-lg border border-neutral-200 bg-white text-neutral-950 shadow-[0_24px_90px_rgba(15,15,15,0.08)]">
       <div className="border-b border-neutral-200 px-4 py-4 sm:px-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p className="text-xs font-medium uppercase tracking-[0.24em] text-neutral-500">
-              Demo interattiva Veyra
-            </p>
-            <h3 className="mt-2 text-2xl font-semibold tracking-normal text-neutral-950">
-              Vetrina moda con carrello locale
-            </h3>
+          <div className="flex items-start gap-4">
+            <ProjectLogo variant="veyra" size="md" markOnly />
+            <div>
+              <p className="text-xs font-medium uppercase tracking-[0.24em] text-neutral-500">
+                Demo interattiva Veyra
+              </p>
+              <h3 className="mt-2 text-2xl font-semibold tracking-normal text-neutral-950">
+                Vetrina moda con carrello locale
+              </h3>
+            </div>
           </div>
 
           <div className="flex items-center justify-between gap-3 rounded-md border border-neutral-200 bg-neutral-50 px-3 py-2">
@@ -299,7 +303,8 @@ function StoreHero() {
   return (
     <section className="grid gap-6 px-4 py-8 sm:px-6 md:grid-cols-[1fr_0.85fr] md:items-end md:py-10">
       <div>
-        <p className="text-xs font-medium uppercase tracking-[0.28em] text-neutral-500">
+        <ProjectLogo variant="veyra" size="sm" />
+        <p className="mt-5 text-xs font-medium uppercase tracking-[0.28em] text-neutral-500">
           Nuova stagione
         </p>
         <h4 className="mt-4 max-w-2xl text-5xl font-semibold leading-[0.94] tracking-normal sm:text-6xl">
@@ -477,6 +482,8 @@ function MiniCart({
   onAdd: (product: Product) => void;
   onRemove: (productId: string) => void;
 }) {
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
+
   return (
     <aside className="border-t border-neutral-200 bg-neutral-50 p-4 sm:p-6 lg:border-l lg:border-t-0">
       <div className="sticky top-20">
@@ -560,7 +567,46 @@ function MiniCart({
             Nessun pagamento reale: il carrello mostra solo il comportamento del
             prototipo.
           </p>
+          <button
+            type="button"
+            disabled={cartItems.length === 0}
+            onClick={() => setCheckoutOpen((open) => !open)}
+            className="mt-4 flex w-full items-center justify-center rounded-md bg-white px-4 py-3 text-sm font-medium text-neutral-950 transition-colors hover:bg-neutral-200 disabled:cursor-not-allowed disabled:bg-white/25 disabled:text-white/50"
+          >
+            Checkout simulato
+          </button>
         </div>
+
+        <AnimatePresence>
+          {checkoutOpen && cartItems.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 10 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="mt-4 rounded-lg border border-neutral-200 bg-white p-4"
+            >
+              <p className="text-sm font-semibold">Checkout concept</p>
+              <div className="mt-4 grid gap-3">
+                {["Contatto", "Spedizione", "Pagamento"].map((item, index) => (
+                  <div
+                    key={item}
+                    className="flex items-center justify-between rounded-md border border-neutral-200 px-3 py-2"
+                  >
+                    <span className="text-sm text-neutral-600">{item}</span>
+                    <span className="text-xs font-medium text-neutral-400">
+                      0{index + 1}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-4 text-xs leading-5 text-neutral-500">
+                Flusso dimostrativo: nessun ordine viene creato e nessun dato
+                viene inviato.
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </aside>
   );

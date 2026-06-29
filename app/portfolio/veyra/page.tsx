@@ -16,6 +16,7 @@ import {
 
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/fade-in";
 import { VeyraStorefrontDemo } from "@/components/portfolio/veyra-storefront-demo";
+import { ProjectLogo } from "@/components/project-logo";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
@@ -80,20 +81,56 @@ const businessPoints = [
   "Esperienza mobile pensata per boutique"
 ];
 
+const overview = [
+  ["Tipo", "E-commerce moda"],
+  ["Settore", "Fashion e streetwear"],
+  ["Focus", "Catalogo e acquisto"],
+  ["Stato", "Portfolio concept"]
+];
+
+const developmentSteps = [
+  "Definizione di una direzione visiva bianca, minimale ed editoriale.",
+  "Organizzazione di categorie, top seller, schede prodotto e carrello.",
+  "Prototipo interattivo con filtro prodotti, vista rapida e mini carrello.",
+  "Rifinitura di micro interazioni e layout mobile-first."
+];
+
 export default function VeyraPage() {
   return (
     <>
       <SiteHeader />
       <main className="bg-white text-neutral-950">
         <HeroSection />
+        <OverviewSection />
         <ProblemSolutionSection />
         <FeatureSection />
+        <ScreensSection />
         <StorefrontSection />
+        <DevelopmentProcessSection />
         <TechSection />
         <ProjectCta />
       </main>
       <SiteFooter />
     </>
+  );
+}
+
+function OverviewSection() {
+  return (
+    <section className="border-b border-neutral-200 py-16 sm:py-20">
+      <div className="section-shell">
+        <FadeIn className="grid gap-3 rounded-lg border border-neutral-200 bg-neutral-50 p-4 sm:grid-cols-4 sm:p-5">
+          {overview.map(([label, value]) => (
+            <div key={label} className="rounded-md bg-white p-4">
+              <p className="text-xs uppercase text-neutral-500">{label}</p>
+              <p className="mt-2 text-sm font-semibold text-neutral-950">
+                {value}
+              </p>
+            </div>
+          ))}
+        </FadeIn>
+      </div>
+    </section>
   );
 }
 
@@ -152,7 +189,7 @@ function HeroSection() {
                   size="lg"
                   className="border-neutral-300 bg-white text-neutral-950 hover:bg-neutral-50"
                 >
-                  <a href="mailto:hello@novary.dev?subject=Richiesta%20negozio%20moda%20Novary">
+                  <a href="/consulenza">
                     Parla con Novary
                   </a>
                 </Button>
@@ -182,9 +219,11 @@ function VeyraHeroMockup() {
       aria-label="Anteprima editoriale dell'interfaccia Veyra"
     >
       <div className="absolute inset-0 bg-[linear-gradient(90deg,#f8f8f6_0%,#f8f8f6_52%,#111_52%,#111_100%)]" />
-      <div className="absolute left-6 top-6 right-6 flex items-center justify-between text-xs font-medium uppercase tracking-[0.22em]">
-        <span>Veyra</span>
-        <span className="text-white">Collezione 01</span>
+      <div className="absolute left-6 right-6 top-6 flex items-center justify-between">
+        <ProjectLogo variant="veyra" size="sm" />
+        <span className="text-xs font-medium uppercase tracking-[0.22em] text-white">
+          Collezione 01
+        </span>
       </div>
       <div className="absolute left-7 top-24 max-w-[230px]">
         <p className="text-xs font-medium uppercase tracking-[0.2em] text-neutral-500">
@@ -227,7 +266,7 @@ function ProblemSolutionSection() {
             delay={0.08}
             className="rounded-lg border border-neutral-950 bg-neutral-950 p-6 text-white sm:p-8"
           >
-            <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/15 bg-white text-neutral-950">
+            <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-white/20 bg-white text-neutral-950">
               <Workflow aria-hidden="true" className="h-5 w-5" />
             </div>
             <h2 className="mt-6 text-3xl font-semibold">Soluzione</h2>
@@ -322,6 +361,75 @@ function StorefrontSection() {
   );
 }
 
+function ScreensSection() {
+  return (
+    <section className="border-b border-neutral-200 py-20 sm:py-24">
+      <div className="section-shell">
+        <FadeIn className="max-w-3xl">
+          <Badge className="border-neutral-200 bg-neutral-50 text-neutral-600 shadow-none">
+            Schermate chiave
+          </Badge>
+          <h2 className="mt-5 text-balance text-3xl font-semibold leading-tight sm:text-4xl">
+            Un ritmo editoriale pensato per far respirare il prodotto.
+          </h2>
+        </FadeIn>
+        <StaggerContainer className="mt-10 grid gap-4 md:grid-cols-3">
+          {["Homepage", "Catalogo filtrato", "Carrello"].map((item, index) => (
+            <StaggerItem key={item}>
+              <div className="overflow-hidden rounded-lg border border-neutral-200 bg-white p-4">
+                <div className="relative h-56 overflow-hidden rounded-lg bg-neutral-100">
+                  <div className="absolute inset-0 bg-[linear-gradient(90deg,#f7f5f0_0%,#f7f5f0_52%,#111_52%,#111_100%)]" />
+                  <div className="absolute left-5 top-5 h-2 w-20 rounded-sm bg-neutral-950" />
+                  <div
+                    className="absolute left-5 top-16 rounded-md bg-white p-4 shadow-[0_18px_50px_rgba(15,15,15,0.12)]"
+                    style={{ width: `${120 + index * 24}px` }}
+                  >
+                    <div className="h-2 w-20 rounded-sm bg-neutral-950" />
+                    <div className="mt-2 h-1.5 w-14 rounded-sm bg-neutral-300" />
+                  </div>
+                  <div className="absolute bottom-7 right-5 h-12 w-28 rounded-full bg-white shadow-[0_18px_44px_rgba(0,0,0,0.2)]" />
+                </div>
+                <p className="mt-4 text-sm font-semibold">{item}</p>
+              </div>
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+      </div>
+    </section>
+  );
+}
+
+function DevelopmentProcessSection() {
+  return (
+    <section className="border-b border-neutral-200 py-20 sm:py-24">
+      <div className="section-shell">
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1fr]">
+          <FadeIn>
+            <Badge className="border-neutral-200 bg-neutral-50 text-neutral-600 shadow-none">
+              Processo di sviluppo
+            </Badge>
+            <h2 className="mt-5 text-balance text-3xl font-semibold leading-tight sm:text-4xl">
+              Dal linguaggio editoriale a un prototipo acquistabile.
+            </h2>
+          </FadeIn>
+          <StaggerContainer className="grid gap-3">
+            {developmentSteps.map((item, index) => (
+              <StaggerItem key={item}>
+                <div className="grid gap-4 rounded-lg border border-neutral-200 bg-neutral-50 p-4 sm:grid-cols-[3rem_1fr]">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-md bg-neutral-950 text-sm font-semibold text-white">
+                    {index + 1}
+                  </span>
+                  <p className="text-sm leading-6 text-neutral-600">{item}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function TechSection() {
   return (
     <section className="border-b border-neutral-200 py-20 sm:py-24">
@@ -373,8 +481,8 @@ function ProjectCta() {
             Vuoi un negozio online premium per il tuo marchio moda?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-white/70 sm:text-lg">
-            Novary puo progettare una presenza digitale su misura per marchi
-            moda, negozi streetwear e boutique che vogliono vendere con piu
+            Novary può progettare una presenza digitale su misura per marchi
+            moda, negozi streetwear e boutique che vogliono vendere con più
             eleganza e chiarezza.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
@@ -383,7 +491,7 @@ function ProjectCta() {
               size="lg"
               className="bg-white text-neutral-950 shadow-none hover:bg-neutral-200"
             >
-              <a href="mailto:hello@novary.dev?subject=Richiesta%20negozio%20moda%20premium%20Novary">
+              <a href="/consulenza">
                 Contatta Novary
                 <ArrowUpRight aria-hidden="true" />
               </a>

@@ -3,6 +3,10 @@ import { ArrowUpRight } from "lucide-react";
 
 import { SectionHeading } from "@/components/section-heading";
 import { StaggerContainer, StaggerItem } from "@/components/fade-in";
+import {
+  ProjectLogo,
+  type ProjectLogoVariant
+} from "@/components/project-logo";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -12,89 +16,109 @@ import {
   CardTitle
 } from "@/components/ui/card";
 
-const projects = [
+type PortfolioProject = {
+  name: string;
+  type: string;
+  category: string;
+  description: string;
+  outcome: string;
+  tags: string[];
+  href?: string;
+  preview?: string;
+  logo: ProjectLogoVariant;
+};
+
+const projects: PortfolioProject[] = [
   {
     name: "Cutly",
-    type: "Concept",
+    type: "Case study",
     category: "Prenotazioni saloni",
     description:
-      "Una web app premium per saloni, barbieri e parrucchieri: registrazione, scelta servizio, professionista, giorno, orario e conferma.",
+      "Piattaforma premium per prenotare servizi, professionisti, giorno e orario con un flusso guidato.",
     outcome:
-      "Obiettivo: ridurre le telefonate, semplificare le prenotazioni e migliorare l'esperienza cliente da mobile.",
-    tags: ["Prenotazioni", "Saloni", "Demo interattiva"],
+      "Meno telefonate ripetitive, agenda piu ordinata e un'esperienza cliente piu fluida da mobile.",
+    tags: ["Booking", "Calendario", "Demo interattiva"],
     href: "/portfolio/cutly",
-    preview: "cutly"
+    preview: "cutly",
+    logo: "cutly"
   },
   {
     name: "Veyra",
-    type: "Concept",
+    type: "Case study",
     category: "Moda premium",
     description:
-      "Un negozio online minimale per abbigliamento, scarpe e accessori, con layout editoriale, filtro categorie e carrello simulato.",
+      "E-commerce editoriale per abbigliamento, scarpe e accessori, con filtro categorie, vista rapida e carrello.",
     outcome:
-      "Obiettivo: valorizzare il prodotto, semplificare la scoperta del catalogo e rendere l'acquisto piu elegante da mobile.",
-    tags: ["Moda", "Negozio online", "Demo interattiva"],
+      "Catalogo piu leggibile, presentazione prodotto piu elegante e acquisto piu diretto da smartphone.",
+    tags: ["E-commerce", "Fashion", "Carrello"],
     href: "/portfolio/veyra",
-    preview: "veyra"
+    preview: "veyra",
+    logo: "veyra"
   },
   {
-    name: "Concept per studio professionale",
+    name: "Studio professionale",
     type: "Concept",
     category: "Presenza digitale",
     description:
-      "Una struttura premium per uno studio locale che deve comunicare fiducia, servizi e richiesta di contatto in pochi passaggi.",
-    outcome: "Obiettivo: aumentare la qualità delle richieste e rendere il brand più autorevole online.",
-    tags: ["Sito aziendale", "Esperienza mobile", "SEO locale"]
+      "Una struttura premium per uno studio locale che deve comunicare fiducia, servizi e richiesta di contatto.",
+    outcome:
+      "Obiettivo: aumentare la qualita delle richieste e rendere il brand piu autorevole online.",
+    tags: ["Sito aziendale", "Esperienza mobile", "SEO locale"],
+    logo: "studio"
   },
   {
-    name: "Concept e-commerce locale",
+    name: "Commerce locale",
     type: "Concept",
     category: "Vendita online",
     description:
-      "Un percorso di acquisto essenziale per un'attività che vuole vendere prodotti selezionati senza perdere eleganza e chiarezza.",
-    outcome: "Obiettivo: rendere semplice la scoperta del prodotto e ridurre le frizioni prima dell'acquisto.",
-    tags: ["E-commerce", "Catalogo", "Checkout"]
+      "Un percorso di acquisto essenziale per un'attivita che vuole vendere prodotti selezionati con chiarezza.",
+    outcome:
+      "Obiettivo: rendere semplice la scoperta del prodotto e ridurre le frizioni prima dell'acquisto.",
+    tags: ["Catalogo", "Checkout", "Prodotto"],
+    logo: "commerce"
   },
   {
-    name: "Concept automazione contatti",
+    name: "Automazione contatti",
     type: "Concept",
     category: "Automazione AI",
     description:
-      "Un flusso dimostrativo per raccogliere richieste, qualificarle e preparare risposte operative più rapide.",
-    outcome: "Obiettivo: meno lavoro manuale, dati più ordinati e tempi di risposta più competitivi.",
-    tags: ["Automazione AI", "Flusso contatti", "Pannello operativo"]
+      "Un flusso dimostrativo per raccogliere richieste, qualificarle e preparare risposte operative piu rapide.",
+    outcome:
+      "Obiettivo: meno lavoro manuale, dati piu ordinati e tempi di risposta piu competitivi.",
+    tags: ["AI", "Lead flow", "Pannello operativo"],
+    logo: "automation"
   }
 ];
 
 function MockupPreview({
   index,
-  variant
+  variant,
+  logo
 }: {
   index: number;
   variant?: string;
+  logo: ProjectLogoVariant;
 }) {
   if (variant === "veyra") {
     return (
       <div
-        className="relative h-48 overflow-hidden rounded-md border border-white/10 bg-white"
+        className="relative h-56 overflow-hidden rounded-lg border border-white/10 bg-white"
         aria-hidden="true"
       >
         <div className="absolute inset-0 bg-[linear-gradient(90deg,#f7f5f0_0%,#f7f5f0_52%,#111111_52%,#111111_100%)]" />
-        <div className="absolute left-5 right-5 top-5 flex items-center justify-between">
-          <div>
-            <div className="h-2.5 w-16 rounded-sm bg-black" />
-            <div className="mt-2 h-1.5 w-24 rounded-sm bg-black/20" />
-          </div>
-          <div className="h-8 w-8 rounded-md border border-white/20 bg-white/90" />
+        <div className="absolute left-5 top-5">
+          <ProjectLogo variant={logo} size="sm" />
         </div>
-        <div className="absolute left-5 top-20 h-20 w-28 rounded-t-full bg-white shadow-[0_18px_40px_rgba(0,0,0,0.18)]" />
-        <div className="absolute left-12 top-28 h-14 w-14 rounded-md bg-black" />
+        <div className="absolute right-4 top-4 rounded-md border border-white/20 bg-white p-1 shadow-[0_12px_28px_rgba(0,0,0,0.16)]">
+          <ProjectLogo variant={logo} size="sm" markOnly />
+        </div>
+        <div className="absolute left-5 top-24 h-24 w-32 rounded-t-full bg-white shadow-[0_18px_40px_rgba(0,0,0,0.18)]" />
+        <div className="absolute left-12 top-32 h-16 w-16 rounded-md bg-black" />
         <div className="absolute bottom-5 left-5 rounded-md bg-white px-4 py-3 shadow-[0_14px_36px_rgba(0,0,0,0.16)]">
           <div className="h-2 w-28 rounded-sm bg-black/80" />
           <div className="mt-2 h-1.5 w-16 rounded-sm bg-black/30" />
         </div>
-        <div className="absolute bottom-8 right-5 h-12 w-28 rounded-full bg-white shadow-[0_18px_40px_rgba(0,0,0,0.2)]" />
-        <div className="absolute bottom-12 right-10 h-5 w-20 rounded-full border border-black/20" />
+        <div className="absolute bottom-9 right-5 h-12 w-28 rounded-full bg-white shadow-[0_18px_40px_rgba(0,0,0,0.2)]" />
       </div>
     );
   }
@@ -102,35 +126,32 @@ function MockupPreview({
   if (variant === "cutly") {
     return (
       <div
-        className="relative h-48 overflow-hidden rounded-md border border-white/10 bg-[#0b0907]"
+        className="relative h-56 overflow-hidden rounded-lg border border-white/10 bg-[#0b0907]"
         aria-hidden="true"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(216,191,139,0.2),transparent_28%),linear-gradient(135deg,#17120d_0%,#050505_74%)]" />
-        <div className="absolute left-5 right-5 top-5 flex items-center justify-between">
-          <div>
-            <div className="h-2.5 w-16 rounded-sm bg-[#d8bf8b]" />
-            <div className="mt-2 h-2 w-24 rounded-sm bg-white/20" />
-          </div>
-          <div className="flex h-8 w-8 items-center justify-center rounded-md bg-[#d8bf8b] text-[10px] font-bold text-black">
-            C
-          </div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(109,74,255,0.24),transparent_28%),linear-gradient(135deg,#17120d_0%,#050505_74%)]" />
+        <div className="absolute left-5 top-5">
+          <ProjectLogo variant={logo} size="sm" />
         </div>
-        <div className="absolute left-5 right-5 top-20 grid grid-cols-2 gap-2">
-          {["Taglio Uomo", "Luca", "10 luglio", "11:00"].map((item, itemIndex) => (
+        <div className="absolute right-4 top-4 rounded-md border border-white/10 bg-black/30 p-1">
+          <ProjectLogo variant={logo} size="sm" markOnly />
+        </div>
+        <div className="absolute left-5 right-5 top-24 grid grid-cols-2 gap-2">
+          {["Servizio", "Luca", "10 luglio", "11:00"].map((item, itemIndex) => (
             <div
               key={item}
               className="rounded-md border border-white/10 bg-white/[0.045] p-3"
             >
               <div className="h-2 w-12 rounded-sm bg-white/[0.18]" />
               <div
-                className="mt-3 h-2 rounded-sm bg-[#d8bf8b]"
+                className="mt-3 h-2 rounded-sm bg-primary"
                 style={{ width: `${48 + itemIndex * 9}%` }}
               />
             </div>
           ))}
         </div>
-        <div className="absolute bottom-5 left-5 right-5 rounded-md bg-[#f3ead8] px-4 py-3">
-          <div className="h-2 w-28 rounded-sm bg-black/70" />
+        <div className="absolute bottom-5 left-5 right-5 rounded-md bg-white px-4 py-3">
+          <div className="h-2 w-28 rounded-sm bg-black/80" />
           <div className="mt-2 h-1.5 w-20 rounded-sm bg-black/30" />
         </div>
       </div>
@@ -139,15 +160,17 @@ function MockupPreview({
 
   return (
     <div
-      className="relative h-48 overflow-hidden rounded-md border border-white/10 bg-black"
+      className="relative h-56 overflow-hidden rounded-lg border border-white/10 bg-black"
       aria-hidden="true"
     >
       <div className="absolute inset-0 surface-grid opacity-70" />
-      <div className="absolute left-5 right-5 top-5 flex items-center justify-between">
-        <div className="h-2.5 w-24 rounded-sm bg-white/20" />
-        <div className="h-7 w-7 rounded-md border border-primary/30 bg-primary/20" />
+      <div className="absolute left-5 top-5">
+        <ProjectLogo variant={logo} size="sm" />
       </div>
-      <div className="absolute left-5 top-16 h-16 w-32 rounded-md border border-white/10 bg-white/[0.04]">
+      <div className="absolute right-4 top-4 rounded-md border border-white/10 bg-black/30 p-1">
+        <ProjectLogo variant={logo} size="sm" markOnly />
+      </div>
+      <div className="absolute left-5 top-20 h-20 w-36 rounded-md border border-white/10 bg-white/[0.04]">
         <div className="m-4 h-3 w-16 rounded-sm bg-primary/70" />
         <div className="mx-4 mt-3 h-2 w-24 rounded-sm bg-white/20" />
         <div className="mx-4 mt-2 h-2 w-14 rounded-sm bg-white/10" />
@@ -165,10 +188,6 @@ function MockupPreview({
           </div>
         ))}
       </div>
-      <div className="absolute right-6 top-20 h-20 w-28 rounded-md border border-white/10 bg-white/[0.035]">
-        <div className="mx-4 mt-5 h-2 rounded-sm bg-white/15" />
-        <div className="mx-4 mt-3 h-2 w-14 rounded-sm bg-primary/60" />
-      </div>
     </div>
   );
 }
@@ -181,8 +200,8 @@ function ProjectCard({
   index: number;
 }) {
   const content = (
-    <Card className="h-full overflow-hidden bg-card/90 transition-colors hover:bg-card">
-      <MockupPreview index={index} variant={project.preview} />
+    <Card className="group h-full overflow-hidden bg-white/[0.03] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-white/[0.052] hover:shadow-[0_28px_100px_rgba(109,74,255,0.13)]">
+      <MockupPreview index={index} variant={project.preview} logo={project.logo} />
       <CardHeader>
         <div className="flex items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-2">
@@ -191,7 +210,7 @@ function ProjectCard({
           </div>
           <ArrowUpRight
             aria-hidden="true"
-            className="h-4 w-4 text-muted-foreground"
+            className="h-4 w-4 text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
           />
         </div>
         <CardTitle>{project.name}</CardTitle>
@@ -211,6 +230,9 @@ function ProjectCard({
             </span>
           ))}
         </div>
+        <p className="mt-6 text-sm font-medium text-primary">
+          {project.href ? "Apri case study" : "Concept esplorativo"}
+        </p>
       </CardContent>
     </Card>
   );
@@ -232,18 +254,18 @@ function ProjectCard({
 
 export function PortfolioSection() {
   return (
-    <section id="work" className="border-b border-white/10 bg-background py-24">
+    <section id="work" className="border-b border-white/10 bg-background py-28">
       <div className="section-shell">
         <SectionHeading
           eyebrow="Portfolio"
-          title="Concept realistici, pensati per problemi di business concreti."
+          title="Case study pensati per mostrare come Novary costruisce prodotti digitali."
         >
-          Questi progetti dimostrativi non rappresentano clienti reali: sono
-          esempi creati per mostrare le capacità di design, sviluppo e strategia
-          digitale di Novary per aziende e professionisti italiani.
+          Progetti dimostrativi, non clienti reali: ogni concept mostra problema,
+          soluzione, funzionalita, stack tecnico e demo interattiva con un taglio
+          vicino a un prodotto pronto per il mercato.
         </SectionHeading>
 
-        <StaggerContainer className="mt-12 grid gap-5 lg:grid-cols-3">
+        <StaggerContainer className="mt-14 grid gap-5 lg:grid-cols-3">
           {projects.map((project, index) => (
             <StaggerItem key={project.name}>
               <ProjectCard project={project} index={index} />
