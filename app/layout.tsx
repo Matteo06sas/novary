@@ -4,27 +4,27 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://novary.dev"),
   title: {
-    default: "Novary | Siti web moderni per far crescere il tuo business",
+    default: "Novary | Prodotti digitali premium",
     template: "%s | Novary"
   },
   description:
-    "Novary realizza siti web veloci, eleganti e ottimizzati per trasformare i visitatori in clienti.",
+    "Novary progetta e sviluppa prodotti digitali premium per aziende, brand e professionisti ambiziosi.",
   applicationName: "Novary",
   alternates: {
     canonical: "/"
   },
   openGraph: {
-    title: "Novary | Siti web moderni per far crescere il tuo business",
+    title: "Novary | Prodotti digitali premium",
     description:
-      "Siti web veloci, eleganti e ottimizzati per aziende locali, professionisti e attività italiane.",
+      "Esperienze digitali eleganti, veloci e curate per aziende, brand e professionisti ambiziosi.",
     url: "https://novary.dev",
     siteName: "Novary",
     images: [
       {
-        url: "/novary-hero-interface.png",
-        width: 1792,
-        height: 1024,
-        alt: "Interfaccia software premium in stile scuro con pannelli di controllo e dettagli blu elettrico"
+        url: "/novary-logo-lockup.png",
+        width: 1200,
+        height: 766,
+        alt: "Logo Novary Digital Solutions"
       }
     ],
     locale: "it_IT",
@@ -32,13 +32,14 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Novary | Siti web moderni per far crescere il tuo business",
+    title: "Novary | Prodotti digitali premium",
     description:
-      "Novary realizza esperienze digitali moderne per aziende locali e professionisti.",
-    images: ["/novary-hero-interface.png"]
+      "Novary realizza prodotti digitali premium per aziende, brand e professionisti.",
+    images: ["/novary-logo-lockup.png"]
   },
   icons: {
-    icon: "/favicon.svg"
+    icon: "/novary-mark.png",
+    apple: "/novary-mark.png"
   }
 };
 

@@ -4,53 +4,54 @@ import { FadeIn, StaggerContainer, StaggerItem } from "@/components/fade-in";
 const steps = [
   {
     step: "01",
-    title: "Analisi",
-    label: "Direzione strategica",
+    title: "Direzione",
+    label: "Strategia e posizionamento",
     description:
-      "Allineiamo obiettivi, pubblico, offerta e priorità commerciali per capire cosa deve davvero ottenere il sito."
+      "Allineiamo obiettivi, pubblico, offerta e tono visivo per capire quale esperienza deve costruire fiducia."
   },
   {
     step: "02",
-    title: "Progettazione",
-    label: "Struttura e identità",
+    title: "Interfaccia",
+    label: "Architettura e design",
     description:
-      "Definiamo architettura, contenuti e direzione visiva con un'interfaccia essenziale, leggibile e coerente."
+      "Definiamo struttura, contenuti e componenti con una gerarchia pulita, mobile-first e coerente con il brand."
   },
   {
     step: "03",
-    title: "Sviluppo",
-    label: "Performance e dettagli",
+    title: "Prodotto",
+    label: "Sviluppo e interazioni",
     description:
-      "Costruiamo componenti puliti, pagine responsive e una base tecnica veloce, solida e pronta per crescere."
+      "Costruiamo pagine veloci, responsive e curate nei micro dettagli, senza aggiungere complessita inutile."
   },
   {
     step: "04",
-    title: "Consegna",
-    label: "Lancio e prossimi passi",
+    title: "Lancio",
+    label: "Controllo e crescita",
     description:
-      "Prepariamo la pubblicazione, controlliamo gli elementi critici e condividiamo indicazioni chiare per evolvere."
+      "Verifichiamo performance, contenuti e percorso utente, poi prepariamo una base solida per evoluzioni future."
   }
 ];
 
 export function ProcessSection() {
   return (
-    <section id="process" className="border-b border-white/10 bg-[#070707] py-24">
+    <section id="process" className="border-b border-white/10 bg-[#070708] py-28">
       <div className="section-shell">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <SectionHeading
             eyebrow="Processo"
-            title="Un metodo ordinato, pensato per arrivare online con sicurezza."
+            title="Un metodo preciso, pensato per trasformare un'idea in prodotto digitale."
           >
-            Novary mantiene il lavoro snello e trasparente, con decisioni
-            guidate dagli obiettivi reali della tua attività.
+            La parte visibile deve sembrare semplice. Dietro, Novary lavora su
+            direzione, struttura, performance e dettagli per rendere ogni scelta
+            intenzionale.
           </SectionHeading>
 
           <StaggerContainer className="grid gap-4">
             {steps.map((item) => (
               <StaggerItem key={item.step}>
-                <div className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.025] p-5 transition-colors hover:border-white/20 hover:bg-white/[0.04] sm:grid-cols-[5rem_1fr]">
+                <div className="grid gap-5 rounded-lg border border-white/10 bg-white/[0.028] p-5 transition-all duration-300 hover:border-primary/30 hover:bg-white/[0.05] sm:grid-cols-[5rem_1fr]">
                   <div>
-                    <div className="flex h-12 w-12 items-center justify-center rounded-md border border-primary/25 bg-primary/10 text-sm font-semibold text-primary">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 text-sm font-semibold text-primary">
                       {item.step}
                     </div>
                   </div>
@@ -58,7 +59,7 @@ export function ProcessSection() {
                     <p className="text-xs font-medium uppercase text-primary">
                       {item.label}
                     </p>
-                    <h3 className="text-xl font-semibold text-foreground">
+                    <h3 className="mt-1 text-xl font-semibold text-foreground">
                       {item.title}
                     </h3>
                     <p className="mt-2 text-sm leading-6 text-muted-foreground">
@@ -73,8 +74,8 @@ export function ProcessSection() {
 
         <FadeIn className="mt-14 border-t border-white/10 pt-8">
           <p className="max-w-3xl text-lg leading-8 text-muted-foreground">
-            Il risultato è una presenza digitale curata, veloce e costruita per
-            supportare il business anche dopo il lancio.
+            Il risultato e una presenza digitale elegante, veloce e pronta a
+            sostenere il business anche dopo il lancio.
           </p>
         </FadeIn>
       </div>

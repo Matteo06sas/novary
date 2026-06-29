@@ -15,6 +15,7 @@ import {
   UserRound
 } from "lucide-react";
 
+import { ProjectLogo } from "@/components/project-logo";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -35,10 +36,10 @@ const services = [
 ];
 
 const professionals = [
-  { name: "Luca", role: "Barbiere", focus: "Tagli sfumati e barba" },
-  { name: "Sofia", role: "Parrucchiera", focus: "Tagli donna e piega" },
-  { name: "Marco", role: "Colorista", focus: "Colore e trattamenti" },
-  { name: "Giulia", role: "Consulente stile", focus: "Consulenza e look" }
+  { name: "Luca", role: "Barbiere", focus: "Tagli sfumati e barba", initials: "LC" },
+  { name: "Sofia", role: "Parrucchiera", focus: "Tagli donna e piega", initials: "SF" },
+  { name: "Marco", role: "Colorista", focus: "Colore e trattamenti", initials: "MR" },
+  { name: "Giulia", role: "Consulente stile", focus: "Consulenza e look", initials: "GL" }
 ];
 
 const availableDays = [
@@ -147,13 +148,16 @@ export function CutlyBookingDemo() {
     <div className="overflow-hidden rounded-lg border border-white/10 bg-[#0c0b0a] shadow-[0_28px_110px_rgba(0,0,0,0.45)]">
       <div className="border-b border-white/10 bg-white/[0.035] p-4 sm:p-5">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p className="text-sm font-medium text-[#d8bf8b]">
-              Demo interattiva Cutly
-            </p>
-            <h3 className="mt-2 text-2xl font-semibold text-white">
-              Flusso di prenotazione in 5 passaggi
-            </h3>
+          <div className="flex items-start gap-4">
+            <ProjectLogo variant="cutly" size="md" markOnly />
+            <div>
+              <p className="text-sm font-medium text-[#d8bf8b]">
+                Demo interattiva Cutly
+              </p>
+              <h3 className="mt-2 text-2xl font-semibold text-white">
+                Flusso di prenotazione in 5 passaggi
+              </h3>
+            </div>
           </div>
           <div className="rounded-md border border-white/10 bg-black/30 px-3 py-2 text-sm text-white/70">
             Passaggio {step + 1} di {steps.length}
@@ -273,15 +277,14 @@ export function CutlyBookingDemo() {
                   />
                   <div className="mt-6 grid gap-3 sm:grid-cols-2">
                     {professionals.map((item) => (
-                      <OptionButton
+                      <ProfessionalButton
                         key={item.name}
                         active={professional === item.name}
                         onClick={() => {
                           setProfessional(item.name);
                           setConfirmed(false);
                         }}
-                        title={item.name}
-                        meta={`${item.role} - ${item.focus}`}
+                        professional={item}
                       />
                     ))}
                   </div>
@@ -295,31 +298,81 @@ export function CutlyBookingDemo() {
                     title="Seleziona giorno e ora"
                     text="Gli orari disponibili sono ordinati per rendere la scelta immediata."
                   />
-                  <div className="mt-6 grid gap-3 md:grid-cols-3">
-                    {availableDays.map((item) => (
-                      <button
-                        key={item.label}
-                        type="button"
-                        onClick={() => {
-                          setDay(item.label);
-                          setTime(item.times[0]);
-                          setConfirmed(false);
-                        }}
-                        className={cn(
-                          "rounded-lg border p-4 text-left transition-all",
-                          day === item.label
-                            ? "border-[#d8bf8b]/60 bg-[#d8bf8b]/10 text-white shadow-[0_0_28px_rgba(216,191,139,0.12)]"
-                            : "border-white/10 bg-white/[0.035] text-white/75 hover:border-white/20 hover:bg-white/[0.055]"
-                        )}
-                      >
-                        <span className="block text-sm font-semibold">
-                          {item.label}
-                        </span>
-                        <span className="mt-1 block text-xs text-white/50">
-                          {item.note}
-                        </span>
-                      </button>
-                    ))}
+                  <div className="mt-6 grid gap-4 lg:grid-cols-[0.78fr_1fr]">
+                    <div className="rounded-lg border border-white/10 bg-black/25 p-4">
+                      <div className="flex items-center justify-between">
+                        <p className="text-sm font-semibold text-white">Luglio</p>
+                        <p className="text-xs text-white/45">Disponibilita</p>
+                      </div>
+                      <div className="mt-4 grid grid-cols-7 gap-2 text-center text-xs text-white/45">
+                        {["L", "M", "M", "G", "V", "S", "D"].map((item) => (
+                          <span key={item}>{item}</span>
+                        ))}
+                      </div>
+                      <div className="mt-3 grid grid-cols-7 gap-2">
+                        {Array.from({ length: 14 }).map((_, index) => {
+                          const number = index + 1;
+                          const matchingDay = availableDays.find((item) =>
+                            item.label.includes(` ${number} `)
+                          );
+                          const isSelected = matchingDay?.label === day;
+
+                          return (
+                            <button
+                              key={number}
+                              type="button"
+                              disabled={!matchingDay}
+                              onClick={() => {
+                                if (!matchingDay) {
+                                  return;
+                                }
+
+                                setDay(matchingDay.label);
+                                setTime(matchingDay.times[0]);
+                                setConfirmed(false);
+                              }}
+                              className={cn(
+                                "aspect-square rounded-md border text-sm transition-colors",
+                                isSelected
+                                  ? "border-[#d8bf8b] bg-[#d8bf8b] text-black"
+                                  : matchingDay
+                                    ? "border-white/10 bg-white/[0.04] text-white hover:bg-white/[0.08]"
+                                    : "border-transparent text-white/20"
+                              )}
+                            >
+                              {number}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    <div className="grid gap-3">
+                      {availableDays.map((item) => (
+                        <button
+                          key={item.label}
+                          type="button"
+                          onClick={() => {
+                            setDay(item.label);
+                            setTime(item.times[0]);
+                            setConfirmed(false);
+                          }}
+                          className={cn(
+                            "rounded-lg border p-4 text-left transition-all",
+                            day === item.label
+                              ? "border-[#d8bf8b]/60 bg-[#d8bf8b]/10 text-white shadow-[0_0_28px_rgba(216,191,139,0.12)]"
+                              : "border-white/10 bg-white/[0.035] text-white/75 hover:border-white/20 hover:bg-white/[0.055]"
+                          )}
+                        >
+                          <span className="block text-sm font-semibold">
+                            {item.label}
+                          </span>
+                          <span className="mt-1 block text-xs text-white/50">
+                            {item.note}
+                          </span>
+                        </button>
+                      ))}
+                    </div>
                   </div>
 
                   <div className="mt-6 rounded-lg border border-white/10 bg-black/25 p-4">
@@ -554,13 +607,70 @@ function OptionButton({
             "flex h-5 w-5 items-center justify-center rounded-sm border transition-colors",
             active
               ? "border-[#d8bf8b] bg-[#d8bf8b] text-black"
-              : "border-white/15 text-transparent group-hover:border-white/30"
+              : "border-white/20 text-transparent group-hover:border-white/30"
           )}
         >
           <Check className="h-3.5 w-3.5" />
         </span>
       </span>
       <span className="mt-2 block text-sm text-white/50">{meta}</span>
+    </button>
+  );
+}
+
+function ProfessionalButton({
+  active,
+  onClick,
+  professional
+}: {
+  active: boolean;
+  onClick: () => void;
+  professional: (typeof professionals)[number];
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "group rounded-lg border p-4 text-left transition-all",
+        active
+          ? "border-[#d8bf8b]/60 bg-[#d8bf8b]/10 text-white shadow-[0_0_28px_rgba(216,191,139,0.12)]"
+          : "border-white/10 bg-white/[0.035] text-white/75 hover:border-white/20 hover:bg-white/[0.055]"
+      )}
+    >
+      <span className="flex items-start gap-3">
+        <span
+          className={cn(
+            "flex h-11 w-11 flex-none items-center justify-center rounded-lg border text-xs font-semibold transition-colors",
+            active
+              ? "border-[#d8bf8b] bg-[#d8bf8b] text-black"
+              : "border-white/10 bg-black/25 text-[#d8bf8b]"
+          )}
+        >
+          {professional.initials}
+        </span>
+        <span className="min-w-0 flex-1">
+          <span className="flex items-center justify-between gap-3">
+            <span className="text-base font-semibold">{professional.name}</span>
+            <span
+              className={cn(
+                "flex h-5 w-5 items-center justify-center rounded-sm border transition-colors",
+                active
+                  ? "border-[#d8bf8b] bg-[#d8bf8b] text-black"
+                  : "border-white/20 text-transparent group-hover:border-white/30"
+              )}
+            >
+              <Check className="h-3.5 w-3.5" />
+            </span>
+          </span>
+          <span className="mt-1 block text-sm text-white/50">
+            {professional.role}
+          </span>
+          <span className="mt-2 block text-xs leading-5 text-white/45">
+            {professional.focus}
+          </span>
+        </span>
+      </span>
     </button>
   );
 }

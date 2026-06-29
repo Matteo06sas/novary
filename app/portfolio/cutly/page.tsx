@@ -18,6 +18,7 @@ import {
 
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/fade-in";
 import { CutlyBookingDemo } from "@/components/portfolio/cutly-booking-demo";
+import { ProjectLogo } from "@/components/project-logo";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { Badge } from "@/components/ui/badge";
@@ -88,20 +89,54 @@ const mockupItems = [
   { label: "Orario", value: "Mer 10 luglio, 11:00", icon: Clock3 }
 ];
 
+const overview = [
+  ["Tipo", "Piattaforma prenotazioni"],
+  ["Settore", "Saloni e barber shop"],
+  ["Focus", "Prenotazione mobile-first"],
+  ["Stato", "Portfolio concept"]
+];
+
+const developmentSteps = [
+  "Mappatura del flusso cliente: registrazione, servizio, professionista, disponibilita e conferma.",
+  "Definizione di card e controlli pensati per uso rapido da smartphone.",
+  "Prototipo interattivo con stato locale e transizioni leggere.",
+  "Rifinitura visiva per rendere il prodotto piu premium e ridurre attrito."
+];
+
 export default function CutlyPage() {
   return (
     <>
       <SiteHeader />
       <main className="bg-[#070605] text-white">
         <HeroSection />
+        <OverviewSection />
         <ProblemSolutionSection />
         <FeatureSection />
+        <ScreensSection />
         <BookingSection />
+        <DevelopmentProcessSection />
         <TechSection />
         <ProjectCta />
       </main>
       <SiteFooter />
     </>
+  );
+}
+
+function OverviewSection() {
+  return (
+    <section className="border-b border-white/10 py-16 sm:py-20">
+      <div className="section-shell">
+        <FadeIn className="grid gap-3 rounded-lg border border-white/10 bg-white/[0.035] p-4 sm:grid-cols-4 sm:p-5">
+          {overview.map(([label, value]) => (
+            <div key={label} className="rounded-md bg-black/20 p-4">
+              <p className="text-xs uppercase text-white/40">{label}</p>
+              <p className="mt-2 text-sm font-semibold text-white">{value}</p>
+            </div>
+          ))}
+        </FadeIn>
+      </div>
+    </section>
   );
 }
 
@@ -163,7 +198,7 @@ function HeroSection() {
                   size="lg"
                   className="border-white/10 bg-white/[0.035]"
                 >
-                  <a href="mailto:hello@novary.dev?subject=Richiesta%20progetto%20prenotazioni%20Novary">
+                  <a href="/consulenza">
                     Parla con Novary
                   </a>
                 </Button>
@@ -194,11 +229,9 @@ function CutlyHeroMockup() {
     >
       <div className="rounded-lg border border-white/10 bg-[#15110c] p-4">
         <div className="flex items-center justify-between">
-          <div>
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-[#d8bf8b]">
-              Cutly
-            </p>
-            <p className="mt-1 text-xl font-semibold text-white">
+          <div className="min-w-0">
+            <ProjectLogo variant="cutly" size="md" />
+            <p className="mt-4 text-xl font-semibold text-white">
               Prenota il tuo orario
             </p>
           </div>
@@ -361,6 +394,81 @@ function BookingSection() {
   );
 }
 
+function ScreensSection() {
+  return (
+    <section className="border-b border-white/10 py-20 sm:py-24">
+      <div className="section-shell">
+        <FadeIn className="max-w-3xl">
+          <Badge className="border-white/10 bg-white/[0.035] text-white/60 shadow-none">
+            Schermate chiave
+          </Badge>
+          <h2 className="mt-5 text-balance text-3xl font-semibold leading-tight text-white sm:text-4xl">
+            Ogni passaggio e progettato per essere leggibile in pochi secondi.
+          </h2>
+        </FadeIn>
+        <StaggerContainer className="mt-10 grid gap-4 md:grid-cols-3">
+          {["Profilo cliente", "Scelta orario", "Riepilogo finale"].map(
+            (item, index) => (
+              <StaggerItem key={item}>
+                <div className="overflow-hidden rounded-lg border border-white/10 bg-white/[0.035] p-4">
+                  <div className="rounded-lg border border-white/10 bg-[#120f0b] p-4">
+                    <div className="h-2 w-20 rounded-sm bg-[#d8bf8b]" />
+                    <div className="mt-5 grid gap-2">
+                      {Array.from({ length: 4 }).map((_, lineIndex) => (
+                        <div
+                          key={`${item}-${lineIndex}`}
+                          className="rounded-md border border-white/10 bg-white/[0.04] p-3"
+                        >
+                          <div
+                            className="h-2 rounded-sm bg-white/20"
+                            style={{ width: `${44 + index * 10 + lineIndex * 8}%` }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <p className="mt-4 text-sm font-semibold text-white">{item}</p>
+                </div>
+              </StaggerItem>
+            )
+          )}
+        </StaggerContainer>
+      </div>
+    </section>
+  );
+}
+
+function DevelopmentProcessSection() {
+  return (
+    <section className="border-b border-white/10 py-20 sm:py-24">
+      <div className="section-shell">
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1fr]">
+          <FadeIn>
+            <Badge className="border-white/10 bg-white/[0.035] text-white/60 shadow-none">
+              Processo di sviluppo
+            </Badge>
+            <h2 className="mt-5 text-balance text-3xl font-semibold leading-tight text-white sm:text-4xl">
+              Dal problema operativo a un flusso di prenotazione chiaro.
+            </h2>
+          </FadeIn>
+          <StaggerContainer className="grid gap-3">
+            {developmentSteps.map((item, index) => (
+              <StaggerItem key={item}>
+                <div className="grid gap-4 rounded-lg border border-white/10 bg-white/[0.035] p-4 sm:grid-cols-[3rem_1fr]">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-md bg-[#d8bf8b] text-sm font-semibold text-black">
+                    {index + 1}
+                  </span>
+                  <p className="text-sm leading-6 text-white/70">{item}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function TechSection() {
   return (
     <section className="border-b border-white/10 py-20 sm:py-24">
@@ -408,12 +516,12 @@ function ProjectCta() {
             <MonitorSmartphone aria-hidden="true" className="h-5 w-5" />
           </div>
           <h2 className="mx-auto mt-6 max-w-3xl text-balance text-3xl font-semibold text-white sm:text-4xl">
-            Vuoi una piattaforma di prenotazione per la tua attivita?
+            Vuoi una piattaforma di prenotazione per la tua attività?
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-white/60 sm:text-lg">
-            Novary puo progettare un&apos;esperienza su misura per ridurre le
+            Novary può progettare un&apos;esperienza su misura per ridurre le
             chiamate, semplificare le prenotazioni e dare ai clienti un percorso
-            digitale piu elegante.
+            digitale più elegante.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Button
@@ -421,7 +529,7 @@ function ProjectCta() {
               size="lg"
               className="bg-[#d8bf8b] text-black shadow-none hover:bg-[#ead7ad]"
             >
-              <a href="mailto:hello@novary.dev?subject=Richiesta%20piattaforma%20prenotazioni%20Novary">
+              <a href="/consulenza">
                 Contatta Novary
                 <ArrowUpRight aria-hidden="true" />
               </a>
