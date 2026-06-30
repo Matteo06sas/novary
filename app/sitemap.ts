@@ -1,24 +1,30 @@
 import type { MetadataRoute } from "next";
 
+const baseUrl = "https://novary.dev";
+
+const portfolioSlugs = ["cutly", "veyra", "atlas", "orto", "lumen"];
+
 export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date();
+
   return [
     {
-      url: "https://novary.dev",
-      lastModified: new Date(),
+      url: baseUrl,
+      lastModified,
       changeFrequency: "monthly",
       priority: 1
     },
     {
-      url: "https://novary.dev/portfolio/cutly",
-      lastModified: new Date(),
+      url: `${baseUrl}/consulenza`,
+      lastModified,
       changeFrequency: "monthly",
-      priority: 0.7
+      priority: 0.8
     },
-    {
-      url: "https://novary.dev/portfolio/veyra",
-      lastModified: new Date(),
-      changeFrequency: "monthly",
+    ...portfolioSlugs.map((slug) => ({
+      url: `${baseUrl}/portfolio/${slug}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
       priority: 0.7
-    }
+    }))
   ];
 }

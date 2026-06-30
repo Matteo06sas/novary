@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Novary logo — test</title>
+<style>
+  :root { color-scheme: dark; }
+  body {
+    margin: 0;
+    background: #0A0A0B;
+    color: #F2F0EC;
+    font: 14px/1.5 system-ui, sans-serif;
+    padding: 40px;
+  }
+  h1 { font-size: 16px; font-weight: 600; color: #A8A39A; letter-spacing: .04em; }
+  .row { display: flex; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin: 16px 0 48px; }
+  .cell { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .cap { font-size: 11px; color: #A8A39A; }
+  .badge { width: 96px; height: 96px; }
+  .surface { background: #131315; padding: 24px; border-radius: 16px; display:inline-flex; gap:32px; align-items:flex-end; }
+</style>
+</head>
+<body>
+  <h1>VARIANTE A — argento dominante, champagne che attraversa il centro</h1>
+  <div class="row" id="rowA"></div>
+  <div class="row"><div class="surface" id="surfA"></div></div>
+
+  <h1>VARIANTE B — champagne dominante, diagonale in primo piano</h1>
+  <div class="row" id="rowB"></div>
+
+  <h1>APP ICON / FAVICON (badge)</h1>
+  <div class="row">
+    <div class="cell"><img class="badge" src="/novary-icon.svg" width="24" height="24" alt=""><span class="cap">24</span></div>
+    <div class="cell"><img class="badge" src="/novary-icon.svg" width="32" height="32" alt=""><span class="cap">32</span></div>
+    <div class="cell"><img class="badge" src="/novary-icon.svg" width="48" height="48" alt=""><span class="cap">48</span></div>
+    <div class="cell"><img class="badge" src="/novary-icon.svg" width="64" height="64" alt=""><span class="cap">64</span></div>
+    <div class="cell"><img class="badge" src="/novary-icon.svg" width="128" height="128" alt=""><span class="cap">128</span></div>
+  </div>
+
+<script>
+const variantA = `
+  <polygon points="0,0 26,0 96,112 70,112" fill="url(#cA)"/>
+  <rect x="0" y="0" width="26" height="112" fill="url(#sA)"/>
+  <rect x="70" y="0" width="26" height="112" fill="url(#sA)"/>`;
+const variantB = `
+  <rect x="0" y="0" width="26" height="112" fill="url(#sA)"/>
+  <rect x="70" y="0" width="26" height="112" fill="url(#sA)"/>
+  <polygon points="0,0 26,0 96,112 70,112" fill="url(#cA)"/>`;
+const defs = `
+  <defs>
+    <linearGradient id="sA" x1="0" y1="0" x2="0.25" y2="1">
+      <stop offset="0" stop-color="#FBFAF7"/><stop offset="0.34" stop-color="#DAD6CD"/>
+      <stop offset="0.62" stop-color="#B4B0A6"/><stop offset="1" stop-color="#E9E6DF"/>
+    </linearGradient>
+    <linearGradient id="cA" x1="0.08" y1="0" x2="0.92" y2="1">
+      <stop offset="0" stop-color="#E0C68A"/><stop offset="0.55" stop-color="#C9A66B"/>
+      <stop offset="1" stop-color="#8C6A35"/>
+    </linearGradient>
+  </defs>`;
+const sizes = [24, 32, 48, 96, 240];
+function build(rowId, body) {
+  const row = document.getElementById(rowId);
+  sizes.forEach(s => {
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+    const h = Math.round(s * 112 / 96);
+    cell.innerHTML = `<svg width="${s}" height="${h}" viewBox="0 0 96 112">${defs}${body}</svg><span class="cap">${s}px</span>`;
+    row.appendChild(cell);
+  });
+}
+build('rowA', variantA);
+build('rowB', variantB);
+const surf = document.getElementById('surfA');
+[24,32,48].forEach(s => {
+  const h = Math.round(s*112/96);
+  surf.innerHTML += `<svg width="${s}" height="${h}" viewBox="0 0 96 112">${defs}${variantA}</svg>`;
+});
+</script>
+</body>
+</html>

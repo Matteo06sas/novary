@@ -5,7 +5,10 @@ export type ProjectLogoVariant =
   | "veyra"
   | "studio"
   | "commerce"
-  | "automation";
+  | "automation"
+  | "atlas"
+  | "orto"
+  | "lumen";
 
 type ProjectLogoProps = {
   variant: ProjectLogoVariant;
@@ -74,6 +77,36 @@ const logos: Record<
     root: "text-white",
     mark: "border-primary/40 bg-primary text-white",
     line: "bg-primary",
+    text: "text-white",
+    descriptorText: "text-white/45"
+  },
+  atlas: {
+    name: "Atlas",
+    descriptor: "Automation",
+    monogram: "A",
+    root: "text-white",
+    mark: "border-emerald-400/30 bg-emerald-400 text-black",
+    line: "bg-emerald-400",
+    text: "text-white",
+    descriptorText: "text-white/45"
+  },
+  orto: {
+    name: "Orto",
+    descriptor: "Kitchen",
+    monogram: "O",
+    root: "text-[#2b2420]",
+    mark: "border-[#c8643c]/30 bg-[#c8643c] text-white",
+    line: "bg-[#c8643c]",
+    text: "text-[#2b2420]",
+    descriptorText: "text-[#9a8c7d]"
+  },
+  lumen: {
+    name: "Lumen",
+    descriptor: "Learning",
+    monogram: "L",
+    root: "text-white",
+    mark: "border-cyan-400/30 bg-cyan-400 text-black",
+    line: "bg-cyan-400",
     text: "text-white",
     descriptorText: "text-white/45"
   }

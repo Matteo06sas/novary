@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 112" role="img" aria-label="Novary">
+  <defs>
+    <linearGradient id="nv-silver" x1="0" y1="0" x2="0.25" y2="1">
+      <stop offset="0" stop-color="#FBFAF7"/>
+      <stop offset="0.34" stop-color="#DAD6CD"/>
+      <stop offset="0.62" stop-color="#B4B0A6"/>
+      <stop offset="1" stop-color="#E9E6DF"/>
+    </linearGradient>
+    <linearGradient id="nv-champagne" x1="0.08" y1="0" x2="0.92" y2="1">
+      <stop offset="0" stop-color="#E0C68A"/>
+      <stop offset="0.55" stop-color="#C9A66B"/>
+      <stop offset="1" stop-color="#8C6A35"/>
+    </linearGradient>
+  </defs>
+  <!-- diagonal cut (behind the verticals) -->
+  <polygon points="0,0 26,0 96,112 70,112" fill="url(#nv-champagne)"/>
+  <!-- left vertical bar -->
+  <rect x="0" y="0" width="26" height="112" fill="url(#nv-silver)"/>
+  <!-- right vertical bar -->
+  <rect x="70" y="0" width="26" height="112" fill="url(#nv-silver)"/>
+</svg>

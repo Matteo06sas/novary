@@ -17,6 +17,7 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 type PortfolioProject = {
   name: string;
@@ -27,6 +28,8 @@ type PortfolioProject = {
   tags: string[];
   href?: string;
   preview?: string;
+  /** Themed banner background for compact linked cards. */
+  banner?: string;
   logo: ProjectLogoVariant;
 };
 
@@ -59,6 +62,51 @@ const caseStudies: PortfolioProject[] = [
   }
 ];
 
+const moreCaseStudies: PortfolioProject[] = [
+  {
+    name: "Atlas",
+    type: "Case study",
+    category: "Automazione AI",
+    description:
+      "Flusso che raccoglie le richieste in entrata, le classifica per tipo, priorità e sentiment e prepara bozze di risposta.",
+    outcome:
+      "Obiettivo: meno lavoro manuale, tempi di risposta più rapidi e nessun lead dimenticato.",
+    tags: ["AI", "Triage", "Lead flow"],
+    href: "/portfolio/atlas",
+    banner:
+      "bg-[#0b0f0d] [background-image:radial-gradient(circle_at_78%_25%,rgba(52,211,153,0.22),transparent_55%)]",
+    logo: "atlas"
+  },
+  {
+    name: "Orto",
+    type: "Case study",
+    category: "Ristorazione locale",
+    description:
+      "Menu digitale e ordini mobile-first per bistrot e take-away, con riepilogo pronto per la cucina.",
+    outcome:
+      "Obiettivo: ordini più chiari, meno errori al telefono e piatti presentati meglio.",
+    tags: ["Menu", "Ordini", "Mobile"],
+    href: "/portfolio/orto",
+    banner:
+      "bg-[#f3ece0] [background-image:radial-gradient(circle_at_78%_25%,rgba(200,100,60,0.18),transparent_55%)]",
+    logo: "orto"
+  },
+  {
+    name: "Lumen",
+    type: "Case study",
+    category: "Piattaforma corsi",
+    description:
+      "Piattaforma di corsi con catalogo filtrabile, percorso lezione lineare e progressi sempre visibili.",
+    outcome:
+      "Obiettivo: scoperta più semplice, percorso di studio chiaro ed esperienza coerente.",
+    tags: ["Education", "Catalogo", "Membership"],
+    href: "/portfolio/lumen",
+    banner:
+      "bg-[#0c0c18] [background-image:radial-gradient(circle_at_78%_25%,rgba(34,211,238,0.22),transparent_55%)]",
+    logo: "lumen"
+  }
+];
+
 const concepts: PortfolioProject[] = [
   {
     name: "Studio professionale",
@@ -70,28 +118,6 @@ const concepts: PortfolioProject[] = [
       "Obiettivo: aumentare la qualità delle richieste e rendere il brand più autorevole online.",
     tags: ["Sito aziendale", "SEO locale"],
     logo: "studio"
-  },
-  {
-    name: "Commerce locale",
-    type: "Concept",
-    category: "Vendita online",
-    description:
-      "Un percorso di acquisto essenziale per un'attività che vuole vendere prodotti selezionati con chiarezza.",
-    outcome:
-      "Obiettivo: rendere semplice la scoperta del prodotto e ridurre le frizioni prima dell'acquisto.",
-    tags: ["Catalogo", "Checkout"],
-    logo: "commerce"
-  },
-  {
-    name: "Automazione contatti",
-    type: "Concept",
-    category: "Automazione AI",
-    description:
-      "Un flusso dimostrativo per raccogliere richieste, qualificarle e preparare risposte operative più rapide.",
-    outcome:
-      "Obiettivo: meno lavoro manuale, dati più ordinati e tempi di risposta più competitivi.",
-    tags: ["AI", "Lead flow"],
-    logo: "automation"
   }
 ];
 
@@ -272,6 +298,53 @@ function ConceptCard({ project }: { project: PortfolioProject }) {
   );
 }
 
+function LinkedCaseStudyCard({ project }: { project: PortfolioProject }) {
+  return (
+    <Link
+      href={project.href!}
+      className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      aria-label={`Apri il progetto ${project.name}`}
+    >
+      <Card className="group relative h-full overflow-hidden bg-white/[0.03] transition-[transform,border-color,background-color] duration-200 ease-out-expo hover:-translate-y-px hover:border-primary/25 hover:bg-white/[0.05]">
+        <div
+          className={cn(
+            "relative flex h-24 items-end border-b border-white/10 p-4",
+            project.banner
+          )}
+        >
+          <ProjectLogo variant={project.logo} size="sm" />
+        </div>
+        <CardHeader className="pb-3">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <CardTitle className="text-base">{project.name}</CardTitle>
+              <Badge variant="secondary">{project.category}</Badge>
+            </div>
+            <ArrowUpRight
+              aria-hidden="true"
+              className="h-4 w-4 flex-none text-muted-foreground transition-[transform,color] duration-150 ease-out-expo group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+            />
+          </div>
+          <CardDescription>{project.description}</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-wrap gap-1.5">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded border border-white/10 px-2 py-0.5 text-[11px] text-muted-foreground/70"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+          <p className="mt-4 text-sm font-medium text-primary">Apri case study</p>
+        </CardContent>
+      </Card>
+    </Link>
+  );
+}
+
 export function PortfolioSection() {
   return (
     <section id="work" className="border-b border-white/10 bg-background py-28">
@@ -290,6 +363,15 @@ export function PortfolioSection() {
           {caseStudies.map((project, index) => (
             <StaggerItem key={project.name}>
               <CaseStudyCard project={project} index={index} />
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+
+        {/* More case studies */}
+        <StaggerContainer className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {moreCaseStudies.map((project) => (
+            <StaggerItem key={project.name}>
+              <LinkedCaseStudyCard project={project} />
             </StaggerItem>
           ))}
         </StaggerContainer>
