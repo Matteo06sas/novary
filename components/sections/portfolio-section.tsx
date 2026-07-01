@@ -19,6 +19,8 @@ import {
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
+type PreviewVariant = "cutly" | "veyra" | "atlas" | "orto" | "lumen" | "studio";
+
 type PortfolioProject = {
   name: string;
   type: string;
@@ -26,10 +28,8 @@ type PortfolioProject = {
   description: string;
   outcome: string;
   tags: string[];
-  href?: string;
-  preview?: string;
-  /** Themed banner background for compact linked cards. */
-  banner?: string;
+  href: string;
+  preview: PreviewVariant;
   logo: ProjectLogoVariant;
 };
 
@@ -59,10 +59,7 @@ const caseStudies: PortfolioProject[] = [
     href: "/portfolio/veyra",
     preview: "veyra",
     logo: "veyra"
-  }
-];
-
-const moreCaseStudies: PortfolioProject[] = [
+  },
   {
     name: "Atlas",
     type: "Case study",
@@ -70,11 +67,10 @@ const moreCaseStudies: PortfolioProject[] = [
     description:
       "Flusso che raccoglie le richieste in entrata, le classifica per tipo, priorità e sentiment e prepara bozze di risposta.",
     outcome:
-      "Obiettivo: meno lavoro manuale, tempi di risposta più rapidi e nessun lead dimenticato.",
+      "Meno lavoro manuale, tempi di risposta più rapidi e nessun lead dimenticato.",
     tags: ["AI", "Triage", "Lead flow"],
     href: "/portfolio/atlas",
-    banner:
-      "bg-[#0b0f0d] [background-image:radial-gradient(circle_at_78%_25%,rgba(52,211,153,0.22),transparent_55%)]",
+    preview: "atlas",
     logo: "atlas"
   },
   {
@@ -84,11 +80,10 @@ const moreCaseStudies: PortfolioProject[] = [
     description:
       "Menu digitale e ordini mobile-first per bistrot e take-away, con riepilogo pronto per la cucina.",
     outcome:
-      "Obiettivo: ordini più chiari, meno errori al telefono e piatti presentati meglio.",
+      "Ordini più chiari, meno errori al telefono e piatti presentati meglio.",
     tags: ["Menu", "Ordini", "Mobile"],
     href: "/portfolio/orto",
-    banner:
-      "bg-[#f3ece0] [background-image:radial-gradient(circle_at_78%_25%,rgba(200,100,60,0.18),transparent_55%)]",
+    preview: "orto",
     logo: "orto"
   },
   {
@@ -98,25 +93,23 @@ const moreCaseStudies: PortfolioProject[] = [
     description:
       "Piattaforma di corsi con catalogo filtrabile, percorso lezione lineare e progressi sempre visibili.",
     outcome:
-      "Obiettivo: scoperta più semplice, percorso di studio chiaro ed esperienza coerente.",
+      "Scoperta più semplice, percorso di studio chiaro ed esperienza coerente.",
     tags: ["Education", "Catalogo", "Membership"],
     href: "/portfolio/lumen",
-    banner:
-      "bg-[#0c0c18] [background-image:radial-gradient(circle_at_78%_25%,rgba(34,211,238,0.22),transparent_55%)]",
+    preview: "lumen",
     logo: "lumen"
-  }
-];
-
-const concepts: PortfolioProject[] = [
+  },
   {
-    name: "Studio professionale",
-    type: "Concept",
+    name: "Studio",
+    type: "Case study",
     category: "Presenza digitale",
     description:
-      "Una struttura premium per uno studio locale che deve comunicare fiducia, servizi e richiesta di contatto.",
+      "Sito premium per studi professionali con servizi chiari, metodo visibile e richiesta di consulenza guidata.",
     outcome:
-      "Obiettivo: aumentare la qualità delle richieste e rendere il brand più autorevole online.",
-    tags: ["Sito aziendale", "SEO locale"],
+      "Fiducia prima del contatto, richieste più qualificate e percorso mobile curato.",
+    tags: ["Sito premium", "Lead qualificati", "SEO"],
+    href: "/portfolio/studio",
+    preview: "studio",
     logo: "studio"
   }
 ];
@@ -128,15 +121,55 @@ function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
   el.style.setProperty("--glow-y", `${e.clientY - rect.top}px`);
 }
 
-function MockupPreview({
-  index,
-  variant,
-  logo
+/** Shared grammar for the four "list" mockups (Atlas, Orto, Lumen, Studio) — a 2x2 info grid + bottom summary bar, echoing Cutly's mockup so all six cards read as one family. */
+function ListMockup({
+  logo,
+  bgClassName,
+  rows,
+  footer
 }: {
-  index: number;
-  variant?: string;
   logo: ProjectLogoVariant;
+  bgClassName: string;
+  rows: { label: string; value: string; barClassName: string }[];
+  footer: { title: string; subtitle: string };
 }) {
+  return (
+    <div
+      className={cn(
+        "relative h-56 overflow-hidden rounded-lg border border-white/10 transition-transform duration-500 ease-out-expo group-hover:scale-[1.02]",
+        bgClassName
+      )}
+      aria-hidden="true"
+    >
+      <div className="absolute left-5 top-5">
+        <ProjectLogo variant={logo} size="sm" />
+      </div>
+      <div className="absolute right-4 top-4 rounded-md border border-white/10 bg-black/30 p-1">
+        <ProjectLogo variant={logo} size="sm" markOnly />
+      </div>
+      <div className="absolute left-5 right-5 top-24 grid grid-cols-2 gap-2">
+        {rows.map((row) => (
+          <div
+            key={row.label}
+            className="rounded-md border border-white/10 bg-white/[0.045] p-3"
+          >
+            <div className="h-2 w-12 rounded-sm bg-white/[0.18]" />
+            <div
+              className={cn("mt-3 h-2 rounded-sm", row.barClassName)}
+              style={{ width: row.value }}
+            />
+          </div>
+        ))}
+      </div>
+      <div className="absolute bottom-5 left-5 right-5 rounded-md bg-white px-4 py-3">
+        <div className="h-2 w-28 rounded-sm bg-black/80" />
+        <div className="mt-2 h-1.5 w-20 rounded-sm bg-black/30" />
+      </div>
+    </div>
+  );
+}
+
+function MockupPreview({ variant, logo }: { variant: PreviewVariant; logo: ProjectLogoVariant }) {
   if (variant === "veyra") {
     return (
       <div
@@ -167,7 +200,7 @@ function MockupPreview({
         className="relative h-56 overflow-hidden rounded-lg border border-white/10 bg-[#0b0907] transition-transform duration-500 ease-out-expo group-hover:scale-[1.02]"
         aria-hidden="true"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(109,74,255,0.24),transparent_28%),linear-gradient(135deg,#17120d_0%,#050505_74%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgb(var(--glow)/0.22),transparent_28%),linear-gradient(135deg,#17120d_0%,#050505_74%)]" />
         <div className="absolute left-5 top-5">
           <ProjectLogo variant={logo} size="sm" />
         </div>
@@ -196,128 +229,92 @@ function MockupPreview({
     );
   }
 
-  return null;
-}
-
-function CaseStudyCard({
-  project,
-  index
-}: {
-  project: PortfolioProject;
-  index: number;
-}) {
-  const content = (
-    <Card
-      className="group relative h-full overflow-hidden bg-white/[0.03] transition-[transform,border-color,background-color,box-shadow] duration-200 ease-out-expo hover:-translate-y-px hover:border-primary/25 hover:bg-white/[0.052] hover:shadow-[0_28px_100px_rgba(109,74,255,0.13)]"
-      onMouseMove={onMouseMove}
-    >
-      <div
-        className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{
-          background:
-            "radial-gradient(320px circle at var(--glow-x, 50%) var(--glow-y, 50%), rgba(109,74,255,0.11), transparent 70%)"
-        }}
+  if (variant === "atlas") {
+    return (
+      <ListMockup
+        logo={logo}
+        bgClassName="bg-[radial-gradient(circle_at_72%_18%,rgba(52,211,153,0.22),transparent_28%),linear-gradient(135deg,#0d1512_0%,#050705_74%)]"
+        rows={[
+          { label: "Priorità", value: "72%", barClassName: "bg-emerald-400" },
+          { label: "Sentiment", value: "58%", barClassName: "bg-emerald-400" },
+          { label: "SLA", value: "84%", barClassName: "bg-emerald-400" },
+          { label: "Coda", value: "40%", barClassName: "bg-emerald-400" }
+        ]}
+        footer={{ title: "Richiesta classificata", subtitle: "Bozza pronta in 2s" }}
       />
-      <MockupPreview index={index} variant={project.preview} logo={project.logo} />
-      <CardHeader>
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge>{project.type}</Badge>
-            <Badge variant="secondary">{project.category}</Badge>
-          </div>
-          <ArrowUpRight
-            aria-hidden="true"
-            className="h-4 w-4 flex-none text-muted-foreground transition-[transform,color] duration-150 ease-out-expo group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
-          />
-        </div>
-        <CardTitle>{project.name}</CardTitle>
-        <CardDescription>{project.description}</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm font-medium leading-6 text-foreground">
-          {project.outcome}
-        </p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded-md border border-white/10 px-2.5 py-1 text-xs text-muted-foreground"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <p className="mt-5 text-sm font-medium text-primary">Apri case study</p>
-      </CardContent>
-    </Card>
-  );
+    );
+  }
+
+  if (variant === "orto") {
+    return (
+      <ListMockup
+        logo={logo}
+        bgClassName="bg-[radial-gradient(circle_at_72%_18%,rgba(200,100,60,0.22),transparent_28%),linear-gradient(135deg,#170f0a_0%,#080503_74%)]"
+        rows={[
+          { label: "Tavolo 4", value: "60%", barClassName: "bg-[#c8643c]" },
+          { label: "Tavolo 7", value: "75%", barClassName: "bg-[#c8643c]" },
+          { label: "Take-away", value: "45%", barClassName: "bg-[#c8643c]" },
+          { label: "Consegna", value: "70%", barClassName: "bg-[#c8643c]" }
+        ]}
+        footer={{ title: "Ordine in cucina", subtitle: "Pronto in 12 min" }}
+      />
+    );
+  }
+
+  if (variant === "lumen") {
+    return (
+      <ListMockup
+        logo={logo}
+        bgClassName="bg-[radial-gradient(circle_at_72%_18%,rgba(34,211,238,0.22),transparent_28%),linear-gradient(135deg,#0c0c18_0%,#05050a_74%)]"
+        rows={[
+          { label: "Modulo 1", value: "90%", barClassName: "bg-cyan-400" },
+          { label: "Modulo 2", value: "65%", barClassName: "bg-cyan-400" },
+          { label: "Modulo 3", value: "40%", barClassName: "bg-cyan-400" },
+          { label: "Modulo 4", value: "20%", barClassName: "bg-cyan-400" }
+        ]}
+        footer={{ title: "Corso in corso", subtitle: "3 lezioni rimaste" }}
+      />
+    );
+  }
 
   return (
-    <Link
-      href={project.href!}
-      className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-      aria-label={`Apri il progetto ${project.name}`}
-    >
-      {content}
-    </Link>
-  );
-}
-
-function ConceptCard({ project }: { project: PortfolioProject }) {
-  return (
-    <Card className="group relative h-full overflow-hidden bg-white/[0.018] transition-[border-color,background-color] duration-200 ease-out-expo hover:border-white/20 hover:bg-white/[0.03]">
-      <CardHeader className="pb-4">
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.035]">
-            <ProjectLogo variant={project.logo} size="sm" markOnly />
-          </div>
-          <Badge variant="secondary">{project.category}</Badge>
-        </div>
-        <CardTitle className="mt-2 text-base">{project.name}</CardTitle>
-        <CardDescription>{project.description}</CardDescription>
-      </CardHeader>
-      <CardContent className="border-t border-white/10 pt-4">
-        <p className="text-xs leading-5 text-muted-foreground/80">
-          {project.outcome}
-        </p>
-        <div className="mt-4 flex flex-wrap gap-1.5">
-          {project.tags.map((tag) => (
-            <span
-              key={tag}
-              className="rounded border border-white/10 px-2 py-0.5 text-[11px] text-muted-foreground/70"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-        <p className="mt-4 text-xs font-medium text-muted-foreground">
-          Concept esplorativo
-        </p>
-      </CardContent>
-    </Card>
+    <ListMockup
+      logo={logo}
+      bgClassName="bg-[radial-gradient(circle_at_72%_18%,rgba(143,29,44,0.22),transparent_28%),linear-gradient(135deg,#170d0e_0%,#080505_74%)]"
+      rows={[
+        { label: "Esigenza", value: "70%", barClassName: "bg-[#c85a68]" },
+        { label: "Tempistica", value: "55%", barClassName: "bg-[#c85a68]" },
+        { label: "Budget", value: "40%", barClassName: "bg-[#c85a68]" },
+        { label: "Documenti", value: "85%", barClassName: "bg-[#c85a68]" }
+      ]}
+      footer={{ title: "Richiesta qualificata", subtitle: "Pronta per il contatto" }}
+    />
   );
 }
 
-function LinkedCaseStudyCard({ project }: { project: PortfolioProject }) {
+function CaseStudyCard({ project }: { project: PortfolioProject }) {
   return (
     <Link
-      href={project.href!}
+      href={project.href}
       className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       aria-label={`Apri il progetto ${project.name}`}
     >
-      <Card className="group relative h-full overflow-hidden bg-white/[0.03] transition-[transform,border-color,background-color] duration-200 ease-out-expo hover:-translate-y-px hover:border-primary/25 hover:bg-white/[0.05]">
+      <Card
+        className="group relative h-full overflow-hidden bg-white/[0.03] transition-[transform,border-color,background-color,box-shadow] duration-200 ease-out-expo hover:-translate-y-px hover:border-primary/25 hover:bg-white/[0.052] hover:shadow-[0_28px_100px_rgb(var(--glow)/0.13)]"
+        onMouseMove={onMouseMove}
+      >
         <div
-          className={cn(
-            "relative flex h-24 items-end border-b border-white/10 p-4",
-            project.banner
-          )}
-        >
-          <ProjectLogo variant={project.logo} size="sm" />
-        </div>
-        <CardHeader className="pb-3">
-          <div className="flex items-center justify-between gap-3">
+          className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          style={{
+            background:
+              "radial-gradient(320px circle at var(--glow-x, 50%) var(--glow-y, 50%), rgb(var(--glow) / 0.11), transparent 70%)"
+          }}
+        />
+        <MockupPreview variant={project.preview} logo={project.logo} />
+        <CardHeader>
+          <div className="flex items-center justify-between gap-4">
             <div className="flex flex-wrap items-center gap-2">
-              <CardTitle className="text-base">{project.name}</CardTitle>
+              <Badge>{project.type}</Badge>
               <Badge variant="secondary">{project.category}</Badge>
             </div>
             <ArrowUpRight
@@ -325,20 +322,24 @@ function LinkedCaseStudyCard({ project }: { project: PortfolioProject }) {
               className="h-4 w-4 flex-none text-muted-foreground transition-[transform,color] duration-150 ease-out-expo group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
             />
           </div>
+          <CardTitle>{project.name}</CardTitle>
           <CardDescription>{project.description}</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-wrap gap-1.5">
+          <p className="text-sm font-medium leading-6 text-foreground">
+            {project.outcome}
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2">
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded border border-white/10 px-2 py-0.5 text-[11px] text-muted-foreground/70"
+                className="rounded-md border border-white/10 px-2.5 py-1 text-xs text-muted-foreground"
               >
                 {tag}
               </span>
             ))}
           </div>
-          <p className="mt-4 text-sm font-medium text-primary">Apri case study</p>
+          <p className="mt-5 text-sm font-medium text-primary">Apri case study</p>
         </CardContent>
       </Card>
     </Link>
@@ -358,37 +359,21 @@ export function PortfolioSection() {
           vicino a un prodotto pronto per il mercato.
         </SectionHeading>
 
-        {/* Featured case studies */}
         <StaggerContainer className="mt-14 grid gap-5 md:grid-cols-2">
-          {caseStudies.map((project, index) => (
+          {caseStudies.map((project) => (
             <StaggerItem key={project.name}>
-              <CaseStudyCard project={project} index={index} />
+              <CaseStudyCard project={project} />
             </StaggerItem>
           ))}
         </StaggerContainer>
 
-        {/* More case studies */}
-        <StaggerContainer className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {moreCaseStudies.map((project) => (
-            <StaggerItem key={project.name}>
-              <LinkedCaseStudyCard project={project} />
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
-
-        {/* Concept explorations */}
         <FadeIn>
-          <p className="mt-10 text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground/50">
-            Concept esplorativi
+          <p className="mt-10 max-w-2xl text-sm leading-6 text-muted-foreground/70">
+            Ogni case study è un concept realistico: serve a mostrare metodo,
+            qualità di esecuzione e product thinking senza attribuire risultati
+            a clienti reali.
           </p>
         </FadeIn>
-        <StaggerContainer className="mt-3 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {concepts.map((project) => (
-            <StaggerItem key={project.name}>
-              <ConceptCard project={project} />
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
       </div>
     </section>
   );

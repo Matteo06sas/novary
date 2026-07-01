@@ -1,7 +1,13 @@
 import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, MonitorSmartphone, Sparkles } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  CheckCircle2,
+  MonitorSmartphone,
+  Sparkles
+} from "lucide-react";
 
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/fade-in";
 import { SiteFooter } from "@/components/site-footer";
@@ -299,6 +305,66 @@ export function ProblemSolution({
 }
 
 /* -------------------------------------------------------------------------- */
+/*  Context / objective / approach                                             */
+/* -------------------------------------------------------------------------- */
+
+export type NarrativeBlock = {
+  icon: LucideIcon;
+  label: string;
+  title: string;
+  text: string;
+};
+
+export function NarrativeBlocks({
+  theme,
+  items
+}: {
+  theme: CaseStudyTheme;
+  items: NarrativeBlock[];
+}) {
+  return (
+    <section className={cn("border-b py-20 sm:py-24", theme.border)}>
+      <div className="section-shell">
+        <StaggerContainer className="grid gap-4 lg:grid-cols-3">
+          {items.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <StaggerItem key={item.title}>
+                <article className={cn("h-full rounded-lg border p-6", theme.surface)}>
+                  <div
+                    className={cn(
+                      "flex h-10 w-10 items-center justify-center rounded-lg",
+                      theme.featureIcon
+                    )}
+                  >
+                    <Icon aria-hidden="true" className="h-5 w-5" />
+                  </div>
+                  <p className={cn("mt-5 text-xs uppercase", theme.label)}>
+                    {item.label}
+                  </p>
+                  <h2
+                    className={cn(
+                      "mt-3 text-balance text-2xl font-semibold leading-tight",
+                      theme.heading
+                    )}
+                  >
+                    {item.title}
+                  </h2>
+                  <p className={cn("mt-4 text-sm leading-6", theme.muted)}>
+                    {item.text}
+                  </p>
+                </article>
+              </StaggerItem>
+            );
+          })}
+        </StaggerContainer>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
 /*  Feature grid + outcomes                                                    */
 /* -------------------------------------------------------------------------- */
 
@@ -460,6 +526,150 @@ export function ScreensShowcase({
             ))}
           </StaggerContainer>
         ) : null}
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Design system                                                              */
+/* -------------------------------------------------------------------------- */
+
+export type DesignSystemSwatch = {
+  name: string;
+  className: string;
+};
+
+export type DesignSystemItem = {
+  title: string;
+  text: string;
+  swatches?: DesignSystemSwatch[];
+};
+
+export function DesignSystemSection({
+  theme,
+  title,
+  description,
+  items
+}: {
+  theme: CaseStudyTheme;
+  title: string;
+  description: string;
+  items: DesignSystemItem[];
+}) {
+  return (
+    <section className={cn("border-b py-20 sm:py-24", theme.border)}>
+      <div className="section-shell">
+        <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+          <SectionIntro
+            theme={theme}
+            eyebrow="Design system"
+            title={title}
+            description={description}
+            className="max-w-none"
+          />
+
+          <StaggerContainer className="grid gap-4">
+            {items.map((item) => (
+              <StaggerItem key={item.title}>
+                <div className={cn("rounded-lg border p-5", theme.surface)}>
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <h3 className={cn("text-lg font-semibold", theme.heading)}>
+                        {item.title}
+                      </h3>
+                      <p className={cn("mt-2 text-sm leading-6", theme.muted)}>
+                        {item.text}
+                      </p>
+                    </div>
+
+                    {item.swatches ? (
+                      <div className="flex flex-wrap gap-2 sm:justify-end">
+                        {item.swatches.map((swatch) => (
+                          <span
+                            key={swatch.name}
+                            className={cn(
+                              "inline-flex items-center gap-2 rounded-full border px-2.5 py-1 text-xs",
+                              theme.chip
+                            )}
+                          >
+                            <span
+                              aria-hidden="true"
+                              className={cn(
+                                "h-3 w-3 rounded-full border border-black/10",
+                                swatch.className
+                              )}
+                            />
+                            {swatch.name}
+                          </span>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Result                                                                     */
+/* -------------------------------------------------------------------------- */
+
+export function ResultSection({
+  theme,
+  title,
+  description,
+  items
+}: {
+  theme: CaseStudyTheme;
+  title: string;
+  description: string;
+  items: string[];
+}) {
+  return (
+    <section className={cn("border-b py-20 sm:py-24", theme.border)}>
+      <div className="section-shell">
+        <FadeIn className={cn("rounded-lg border p-6 sm:p-8", theme.surface)}>
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <div>
+              <Badge className={theme.eyebrow}>Risultato</Badge>
+              <h2
+                className={cn(
+                  "mt-5 text-balance text-3xl font-semibold leading-tight sm:text-4xl",
+                  theme.heading
+                )}
+              >
+                {title}
+              </h2>
+              <p className={cn("mt-4 text-base leading-7 sm:text-lg", theme.muted)}>
+                {description}
+              </p>
+            </div>
+
+            <div className="grid gap-3">
+              {items.map((item) => (
+                <div
+                  key={item}
+                  className={cn(
+                    "flex gap-3 rounded-lg border px-4 py-3",
+                    theme.chip
+                  )}
+                >
+                  <CheckCircle2
+                    aria-hidden="true"
+                    className="mt-0.5 h-4 w-4 flex-none"
+                  />
+                  <p className="text-sm leading-6">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );

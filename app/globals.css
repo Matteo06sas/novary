@@ -4,21 +4,27 @@
 
 @layer base {
   :root {
-    --background: 240 8% 3%;
-    --foreground: 0 0% 98%;
-    --card: 240 7% 6%;
-    --card-foreground: 0 0% 98%;
-    --primary: 252 91% 63%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 240 6% 12%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 5% 10%;
-    --muted-foreground: 240 4% 66%;
-    --accent: 252 91% 63%;
-    --accent-foreground: 0 0% 100%;
-    --border: 240 5% 15%;
-    --input: 240 5% 15%;
-    --ring: 252 91% 63%;
+    /* Brand tokens — RGB channels, consumed as rgb(var(--x) / <alpha>). */
+    --background: 10 10 11; /* #0A0A0B */
+    --foreground: 242 240 236; /* #F2F0EC text-primary */
+    --surface: 19 19 21; /* #131315 */
+    --surface-2: 28 28 31; /* #1C1C1F */
+    --card: 19 19 21;
+    --card-foreground: 242 240 236;
+    --primary: 201 166 107; /* #C9A66B champagne accent */
+    --primary-foreground: 10 10 11; /* dark ink on champagne */
+    --secondary: 28 28 31;
+    --secondary-foreground: 242 240 236;
+    --muted: 19 19 21;
+    --muted-foreground: 168 163 154; /* #A8A39A text-secondary */
+    --accent: 201 166 107;
+    --accent-foreground: 10 10 11;
+    --accent-hover: 224 198 138; /* #E0C68A */
+    --accent-deep: 140 106 53; /* #8C6A35 */
+    --border: 38 38 43; /* #26262B */
+    --input: 38 38 43;
+    --ring: 201 166 107;
+    --glow: 201 166 107; /* accent glow color */
     --radius: 0.5rem;
 
     /* Easing system */
@@ -43,8 +49,8 @@
   }
 
   ::selection {
-    background: hsl(var(--primary) / 0.3);
-    color: hsl(var(--foreground));
+    background: rgb(var(--primary) / 0.3);
+    color: rgb(var(--foreground));
   }
 }
 
@@ -83,20 +89,20 @@
 
   .premium-glow {
     background:
-      radial-gradient(ellipse 72% 52% at 18% 14%, hsl(var(--primary) / 0.26), transparent 55%),
-      radial-gradient(ellipse 42% 36% at 82% 6%, rgba(255, 255, 255, 0.07), transparent 40%),
-      radial-gradient(ellipse 50% 55% at 68% 88%, hsl(var(--primary) / 0.1), transparent 55%),
+      radial-gradient(ellipse 72% 52% at 18% 14%, rgb(var(--glow) / 0.2), transparent 55%),
+      radial-gradient(ellipse 42% 36% at 82% 6%, rgba(255, 255, 255, 0.06), transparent 40%),
+      radial-gradient(ellipse 50% 55% at 68% 88%, rgb(var(--glow) / 0.08), transparent 55%),
       linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 48%);
   }
 
   .text-shimmer {
     background: linear-gradient(
       110deg,
-      hsl(var(--foreground)) 0%,
-      hsl(var(--foreground)) 32%,
-      hsl(var(--primary) / 0.9) 50%,
-      hsl(var(--foreground)) 68%,
-      hsl(var(--foreground)) 100%
+      rgb(var(--foreground)) 0%,
+      rgb(var(--foreground)) 32%,
+      rgb(var(--primary) / 0.9) 50%,
+      rgb(var(--foreground)) 68%,
+      rgb(var(--foreground)) 100%
     );
     background-size: 200% auto;
     background-clip: text;

@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { cn } from "@/lib/utils";
 
 type NovaryLogoProps = {
@@ -10,22 +8,16 @@ type NovaryLogoProps = {
 
 const logoConfig = {
   mark: {
-    src: "/novary-mark.png",
-    alt: "Logo Novary",
-    width: 512,
-    height: 512
+    src: "/logo-mark.svg",
+    alt: "Logo Novary"
   },
   wordmark: {
-    src: "/novary-wordmark.png",
-    alt: "Novary Digital Solutions",
-    width: 1200,
-    height: 300
+    src: "/logo-wordmark.svg",
+    alt: "Novary"
   },
   lockup: {
-    src: "/novary-logo-lockup.png",
-    alt: "Novary Digital Solutions",
-    width: 1200,
-    height: 766
+    src: "/logo-full.svg",
+    alt: "Novary Digital Solutions"
   }
 };
 
@@ -37,12 +29,12 @@ export function NovaryLogo({
   const logo = logoConfig[variant];
 
   return (
-    <Image
+    // eslint-disable-next-line @next/next/no-img-element -- vector logo, no benefit from next/image raster optimization
+    <img
       src={logo.src}
       alt={logo.alt}
-      width={logo.width}
-      height={logo.height}
-      priority={priority}
+      loading={priority ? "eager" : "lazy"}
+      fetchPriority={priority ? "high" : undefined}
       className={cn("block select-none object-contain object-center", className)}
     />
   );

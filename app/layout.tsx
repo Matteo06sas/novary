@@ -29,10 +29,10 @@ export const metadata: Metadata = {
     siteName: "Novary",
     images: [
       {
-        url: "/novary-logo-lockup.png",
+        url: "/og-image.png",
         width: 1200,
-        height: 766,
-        alt: "Logo Novary Digital Solutions"
+        height: 630,
+        alt: "Novary — Digital Solutions"
       }
     ],
     locale: "it_IT",
@@ -43,18 +43,18 @@ export const metadata: Metadata = {
     title: "Novary | Prodotti digitali premium",
     description:
       "Novary realizza prodotti digitali premium per aziende, brand e professionisti.",
-    images: ["/novary-logo-lockup.png"]
+    images: ["/og-image.png"]
   },
   icons: {
-    icon: "/novary-mark.png",
-    apple: "/novary-mark.png"
+    icon: "/novary-icon.svg",
+    apple: "/novary-icon.svg"
   }
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#050505",
+  themeColor: "#0A0A0B",
   colorScheme: "dark"
 };
 

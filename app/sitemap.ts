@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 const baseUrl = "https://novary.dev";
 
-const portfolioSlugs = ["cutly", "veyra", "atlas", "orto", "lumen"];
+const portfolioSlugs = ["cutly", "veyra", "atlas", "orto", "lumen", "studio"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();

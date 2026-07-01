@@ -67,7 +67,7 @@ const services: Service[] = [
 
 export function ServicesSection() {
   return (
-    <section id="services" className="border-b border-white/10 bg-[#050506] py-28">
+    <section id="services" className="border-b border-white/10 bg-background py-28">
       <div className="section-shell">
         <SectionHeading
           eyebrow="Servizi"

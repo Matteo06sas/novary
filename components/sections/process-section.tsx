@@ -30,7 +30,7 @@ const steps = [
 
 export function ProcessSection() {
   return (
-    <section id="process" className="border-b border-white/10 bg-[#070708] py-28">
+    <section id="process" className="border-b border-white/10 bg-background py-28">
       <div className="section-shell">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <SectionHeading

@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 
 export function ContactCta() {
   return (
-    <section id="contact" className="bg-[#050506] py-28">
+    <section id="contact" className="bg-background py-28">
       <div className="section-shell">
         <FadeIn className="relative mx-auto max-w-4xl overflow-hidden rounded-xl border border-white/10 bg-white/[0.035] p-8 text-center shadow-[0_36px_140px_rgba(0,0,0,0.5)] sm:p-14">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(109,74,255,0.18),transparent_42%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgb(var(--glow)/0.16),transparent_42%)]" />
           <div className="relative">
             <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 text-primary transition-[transform,border-color,background-color] duration-300 ease-out-expo hover:scale-110 hover:border-primary/40 hover:bg-primary/[0.18]">
               <Mail aria-hidden="true" className="h-5 w-5" />

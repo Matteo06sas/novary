@@ -54,11 +54,11 @@ const logos: Record<
     name: "Studio",
     descriptor: "Presence",
     monogram: "S",
-    root: "text-white",
-    mark: "border-white/20 bg-white text-black",
-    line: "bg-primary",
-    text: "text-white",
-    descriptorText: "text-white/45"
+    root: "text-[#111312]",
+    mark: "border-[#111312] bg-[#111312] text-white",
+    line: "bg-[#8f1d2c]",
+    text: "text-[#111312]",
+    descriptorText: "text-[#68716b]"
   },
   commerce: {
     name: "Locale",

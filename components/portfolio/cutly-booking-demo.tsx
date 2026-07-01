@@ -358,7 +358,7 @@ export function CutlyBookingDemo() {
                             setConfirmed(false);
                           }}
                           className={cn(
-                            "rounded-lg border p-4 text-left transition-all",
+                            "rounded-lg border p-4 text-left transition-[border-color,background-color,box-shadow] active:scale-[0.97]",
                             day === item.label
                               ? "border-[#d8bf8b]/60 bg-[#d8bf8b]/10 text-white shadow-[0_0_28px_rgba(216,191,139,0.12)]"
                               : "border-white/10 bg-white/[0.035] text-white/75 hover:border-white/20 hover:bg-white/[0.055]"
@@ -594,7 +594,7 @@ function OptionButton({
       type="button"
       onClick={onClick}
       className={cn(
-        "group rounded-lg border p-4 text-left transition-all",
+        "group rounded-lg border p-4 text-left transition-[border-color,background-color,box-shadow] active:scale-[0.97]",
         active
           ? "border-[#d8bf8b]/60 bg-[#d8bf8b]/10 text-white shadow-[0_0_28px_rgba(216,191,139,0.12)]"
           : "border-white/10 bg-white/[0.035] text-white/75 hover:border-white/20 hover:bg-white/[0.055]"
@@ -632,7 +632,7 @@ function ProfessionalButton({
       type="button"
       onClick={onClick}
       className={cn(
-        "group rounded-lg border p-4 text-left transition-all",
+        "group rounded-lg border p-4 text-left transition-[border-color,background-color,box-shadow] active:scale-[0.97]",
         active
           ? "border-[#d8bf8b]/60 bg-[#d8bf8b]/10 text-white shadow-[0_0_28px_rgba(216,191,139,0.12)]"
           : "border-white/10 bg-white/[0.035] text-white/75 hover:border-white/20 hover:bg-white/[0.055]"

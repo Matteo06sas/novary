@@ -239,3 +239,37 @@ export const lumenTheme: CaseStudyTheme = {
   ctaPrimaryButton: "bg-cyan-400 text-black shadow-none hover:bg-cyan-300",
   ctaOutlineButton: "border-white/10 bg-white/[0.04]"
 };
+
+/** Porcelain surface with an oxblood signal accent — Studio. */
+export const studioTheme: CaseStudyTheme = {
+  name: "Studio",
+  page: "bg-[#f4f5f2] text-[#111312]",
+  border: "border-[#d9ddd8]",
+  heading: "text-[#111312]",
+  lead: "text-[#4d5550]",
+  muted: "text-[#58625c]",
+  label: "text-[#7b857f]",
+  disclaimer: "text-[#7b857f]",
+  eyebrow: "border-[#d9ddd8] bg-white text-[#59615c] shadow-none",
+  eyebrowAccent:
+    "border-[#8f1d2c]/20 bg-[#8f1d2c]/[0.08] text-[#7e1825] shadow-none",
+  primaryButton: "bg-[#111312] text-white shadow-none hover:bg-[#2b2f2c]",
+  outlineButton: "border-[#cfd5ce] bg-white text-[#111312] hover:bg-[#eef0ec]",
+  backLink: "text-[#58625c] hover:bg-white hover:text-[#111312]",
+  surface: "border-[#d9ddd8] bg-white",
+  surfaceHover: "hover:bg-[#fafafa]",
+  surfaceInner: "bg-[#f4f5f2]",
+  chip: "border-[#d9ddd8] bg-white text-[#58625c]",
+  accentSolid: "bg-[#8f1d2c] text-white",
+  featureIcon: "bg-[#8f1d2c]/10 text-[#8f1d2c]",
+  techIcon: "bg-[#111312] text-white",
+  problemIcon: "border-[#c9cdc8] bg-white text-[#111312]",
+  solutionCard: "border-[#111312] bg-[#111312] text-white",
+  solutionIcon: "border-white/20 bg-white text-[#111312]",
+  solutionText: "text-white/75",
+  ctaCard: "border-[#111312] bg-[#111312] text-white",
+  ctaIcon: "bg-[#8f1d2c] text-white",
+  ctaText: "text-white/75",
+  ctaPrimaryButton: "bg-white text-[#111312] shadow-none hover:bg-[#e8e8e2]",
+  ctaOutlineButton: "border-white/20 bg-white/[0.06] text-white hover:bg-white/10"
+};

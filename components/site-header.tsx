@@ -27,7 +27,7 @@ export function SiteHeader() {
           className="group flex items-center gap-3"
           aria-label="Homepage Novary"
         >
-          <span className="relative grid h-11 w-11 place-items-center rounded-lg border border-white/10 bg-white/[0.035] p-1.5 shadow-[0_0_34px_rgba(109,74,255,0.22)] transition-transform duration-200 ease-out-expo group-hover:scale-[1.06] group-active:scale-[0.97]">
+          <span className="relative grid h-11 w-11 place-items-center rounded-lg border border-white/10 bg-white/[0.035] p-1.5 shadow-[0_0_34px_rgb(var(--glow)/0.22)] transition-transform duration-200 ease-out-expo group-hover:scale-[1.06] group-active:scale-[0.97]">
             <NovaryLogo
               variant="mark"
               className="h-full w-full rounded-md"

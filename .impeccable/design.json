@@ -1,0 +1,167 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-01T00:00:00.000Z",
+  "title": "Design System: Novary",
+  "extensions": {
+    "colorMeta": {
+      "aged-champagne": {
+        "role": "primary",
+        "displayName": "Champagne Invecchiato",
+        "canonical": "oklch(72% 0.09 75)",
+        "tonalRamp": [
+          "oklch(20% 0.03 75)",
+          "oklch(32% 0.05 75)",
+          "oklch(44% 0.07 75)",
+          "oklch(56% 0.085 75)",
+          "oklch(64% 0.09 75)",
+          "oklch(72% 0.09 75)",
+          "oklch(82% 0.075 75)",
+          "oklch(92% 0.04 75)"
+        ]
+      },
+      "champagne-hover": {
+        "role": "primary-hover",
+        "displayName": "Champagne Hover",
+        "canonical": "oklch(82% 0.075 80)"
+      },
+      "champagne-deep": {
+        "role": "primary-deep",
+        "displayName": "Champagne Profondo",
+        "canonical": "oklch(52% 0.075 65)"
+      },
+      "ink-black": {
+        "role": "neutral",
+        "displayName": "Nero Inchiostro",
+        "canonical": "oklch(6% 0.002 280)",
+        "tonalRamp": [
+          "oklch(6% 0.002 280)",
+          "oklch(10% 0.003 280)",
+          "oklch(14% 0.004 280)",
+          "oklch(20% 0.004 280)",
+          "oklch(28% 0.005 280)",
+          "oklch(40% 0.006 280)",
+          "oklch(60% 0.007 280)",
+          "oklch(90% 0.005 90)"
+        ]
+      },
+      "surface": { "role": "neutral", "displayName": "Surface", "canonical": "oklch(10% 0.003 280)" },
+      "surface-2": { "role": "neutral", "displayName": "Surface 2", "canonical": "oklch(13% 0.004 280)" },
+      "text-primary": { "role": "neutral", "displayName": "Testo Primario", "canonical": "oklch(95% 0.005 90)" },
+      "text-secondary": { "role": "neutral", "displayName": "Testo Secondario", "canonical": "oklch(70% 0.01 80)" },
+      "hairline-border": { "role": "neutral", "displayName": "Hairline Border", "canonical": "rgba(255,255,255,0.1)" },
+      "glass-surface": { "role": "neutral", "displayName": "Glass Surface", "canonical": "rgba(255,255,255,0.035)" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Titolo hero, unico per pagina." },
+      "headline": { "displayName": "Headline", "purpose": "Titoli di sezione (h2)." },
+      "body": { "displayName": "Body", "purpose": "Paragrafi lead, max ~65ch." },
+      "label": { "displayName": "Label", "purpose": "Eyebrow, sottotitoli, wordmark — sempre con letter-spacing ampio." }
+    },
+    "shadows": [
+      { "name": "champagne-glow", "value": "0 0 34px rgb(var(--glow) / 0.22)", "purpose": "Segnale di importanza: badge, CTA secondarie, logo mark, icone attive." },
+      { "name": "atmospheric-depth", "value": "0 40px 140px rgba(0,0,0,0.6)", "purpose": "Profondità atmosferica dietro elementi flottanti (hero card)." },
+      { "name": "card-ambient", "value": "0 1px 2px rgba(0,0,0,0.15)", "purpose": "Distacco minimo dal fondo per Card di default." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Easing di default per ogni entrata/interazione UI." },
+      { "name": "ease-in-out", "value": "cubic-bezier(0.77, 0, 0.175, 1)", "purpose": "Movimento on-screen (morph, drag)." },
+      { "name": "ease-spring", "value": "cubic-bezier(0.32, 0.72, 0, 1)", "purpose": "Curva drawer-like per pannelli/menu mobile." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "2xl", "value": "1200px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (Champagne)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Azione secondaria/di supporto. Non usato per la CTA di conversione principale.",
+      "html": "<button class=\"ds-btn-champagne\">Scopri di più</button>",
+      "css": ".ds-btn-champagne { background: #C9A66B; color: #0A0A0B; border: none; border-radius: 6px; padding: 11px 20px; font-weight: 500; font-size: 14px; box-shadow: 0 0 34px rgba(201,166,107,0.22); transition: transform 150ms cubic-bezier(0.23,1,0.32,1), background-color 150ms cubic-bezier(0.23,1,0.32,1); } .ds-btn-champagne:hover { background: #E0C68A; } .ds-btn-champagne:active { transform: scale(0.97); } .ds-btn-champagne:focus-visible { outline: none; box-shadow: 0 0 0 2px #0A0A0B, 0 0 0 4px #C9A66B; }"
+    },
+    {
+      "name": "CTA Button (bianco, conversione primaria)",
+      "kind": "button",
+      "refersTo": "button-cta",
+      "description": "L'unica azione a massimo contrasto del sistema: 'Richiedi consulenza'.",
+      "html": "<button class=\"ds-btn-cta\">Richiedi una consulenza</button>",
+      "css": ".ds-btn-cta { background: #FFFFFF; color: #0A0A0B; border: none; border-radius: 6px; padding: 12px 24px; font-weight: 500; font-size: 15px; box-shadow: 0 0 44px rgba(255,255,255,0.14); transition: transform 150ms cubic-bezier(0.23,1,0.32,1), background-color 150ms cubic-bezier(0.23,1,0.32,1); } .ds-btn-cta:hover { background: rgba(255,255,255,0.9); } .ds-btn-cta:active { transform: scale(0.97); }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Azione secondaria a basso peso visivo (es. 'Vedi i case study').",
+      "html": "<button class=\"ds-btn-outline\">Vedi i case study</button>",
+      "css": ".ds-btn-outline { background: rgba(255,255,255,0.03); color: #F2F0EC; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 11px 20px; font-weight: 500; font-size: 14px; transition: background-color 150ms cubic-bezier(0.23,1,0.32,1); } .ds-btn-outline:hover { background: rgba(255,255,255,0.08); } .ds-btn-outline:active { transform: scale(0.97); }"
+    },
+    {
+      "name": "Badge / Eyebrow",
+      "kind": "chip",
+      "refersTo": "badge-default",
+      "description": "Etichetta di stato o eyebrow sopra un titolo.",
+      "html": "<span class=\"ds-badge\">Premium digital product studio</span>",
+      "css": ".ds-badge { display: inline-flex; align-items: center; border-radius: 6px; padding: 4px 12px; font-size: 12px; font-weight: 500; color: #C9A66B; background: rgba(201,166,107,0.1); border: 1px solid rgba(201,166,107,0.25); box-shadow: 0 0 20px rgba(201,166,107,0.12); }"
+    },
+    {
+      "name": "Card (Glass)",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Contenitore standard: velo di bianco trasparente su nero inchiostro, bordo hairline.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card-title\">Titolo</h3><p class=\"ds-card-desc\">Descrizione breve.</p></div>",
+      "css": ".ds-card { border-radius: 8px; padding: 24px; background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.1); transition: border-color 200ms cubic-bezier(0.23,1,0.32,1), background-color 200ms cubic-bezier(0.23,1,0.32,1); } .ds-card:hover { border-color: rgba(201,166,107,0.25); background: rgba(255,255,255,0.052); } .ds-card-title { font-size: 20px; font-weight: 600; color: #F2F0EC; margin: 0 0 8px; } .ds-card-desc { font-size: 14px; line-height: 1.5; color: #A8A39A; margin: 0; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Campo di testo del form di consulenza.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Il tuo nome\" />",
+      "css": ".ds-input { width: 100%; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.035); color: #F2F0EC; padding: 12px 16px; font-size: 14px; transition: border-color 150ms, box-shadow 150ms; } .ds-input::placeholder { color: rgba(168,163,154,0.7); } .ds-input:focus { outline: none; border-color: rgba(201,166,107,0.4); box-shadow: 0 0 0 2px rgba(201,166,107,0.3); }"
+    },
+    {
+      "name": "Novary Mark",
+      "kind": "custom",
+      "refersTo": "novary-mark",
+      "description": "Il segno N: due barre argento + taglio diagonale champagne, path SVG vero.",
+      "html": "<svg class=\"ds-mark\" viewBox=\"0 0 104 100\"><defs><linearGradient id=\"ds-silver\" x1=\"0\" y1=\"0\" x2=\"0.18\" y2=\"1\"><stop offset=\"0\" stop-color=\"#FBFAF7\"/><stop offset=\"1\" stop-color=\"#EAE7E0\"/></linearGradient><linearGradient id=\"ds-champagne\" x1=\"0.1\" y1=\"0\" x2=\"0.9\" y2=\"1\"><stop offset=\"0\" stop-color=\"#E0C68A\"/><stop offset=\"1\" stop-color=\"#8C6A35\"/></linearGradient></defs><polygon points=\"18,0 37,0 86,100 67,100\" fill=\"url(#ds-champagne)\"/><rect x=\"0\" y=\"0\" width=\"19\" height=\"100\" fill=\"url(#ds-silver)\"/><rect x=\"85\" y=\"0\" width=\"19\" height=\"100\" fill=\"url(#ds-silver)\"/></svg>",
+      "css": ".ds-mark { width: 44px; height: 42px; display: block; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "La Firma Champagne",
+    "overview": "Novary è un'incisione di precisione su una superficie preziosa: due barre d'argento e un taglio diagonale champagne, ripetuti nel logo e nel linguaggio visivo dell'intero sito. Il sistema esiste per dimostrare — non dichiarare — il livello del lavoro: \"il sito è la prova\" (PRODUCT.md). Ogni superficie è quasi nera, quasi silenziosa, finché il champagne non marca esattamente il punto che deve guidare l'attenzione: un focus ring, un hover, un dettaglio. Il sistema rifiuta esplicitamente l'estetica da agenzia generica — layout affollati, decorazioni a gradiente, hero-metrics, iconografia dimenticabile, tutto che urla insieme.",
+    "keyCharacteristics": [
+      "Nero quasi puro come base, mai grigio neutro da dashboard",
+      "Un solo accento (champagne) usato con rarità deliberata, mai sparso",
+      "Bordi hairline bianco-trasparente (10%) invece di grigi pieni",
+      "Glow champagne al posto di ombre drammatiche per segnalare importanza",
+      "Tipografia DM Sans con letter-spacing ampio (0.18–0.34em) su ogni etichetta, come un'incisione"
+    ],
+    "rules": [
+      { "name": "La Regola della Rarità", "body": "Il champagne non è mai un colore di sfondo esteso. Copre bordi, focus ring, glow, testo attivo, dettagli — mai più del ~10% di una schermata.", "section": "colors" },
+      { "name": "La Regola del Contrasto Massimo", "body": "L'unica eccezione alla rarità del champagne è la CTA di conversione primaria: bianco puro su nero, non champagne.", "section": "colors" },
+      { "name": "La Regola dell'Incisione", "body": "Ogni etichetta piccola porta un letter-spacing ampio (≥0.18em), coerente col taglio diagonale del logo.", "section": "typography" },
+      { "name": "La Regola del Bagliore, non dell'Ombra", "body": "Quando un elemento deve risaltare, il sistema usa un glow color (champagne), non un'ombra nera più scura.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do usare il nero inchiostro (#0A0A0B) come sfondo di base ovunque",
+      "Do riservare il champagne a bordi, focus ring, glow, testo attivo, dettagli",
+      "Do usare active:scale-[0.97] su ogni elemento premibile e focus-visible:ring champagne su ogni elemento interattivo, inclusi i link <a> nudi",
+      "Do usare glow champagne (non ombra nera) per segnalare importanza/hover",
+      "Do specificare proprietà esplicite nelle transizioni, mai transition-all",
+      "Do rispettare prefers-reduced-motion su ogni animazione con movimento"
+    ],
+    "donts": [
+      "Don't usare l'estetica da agenzia generica: layout affollati, gradienti decorativi, hero-metrics",
+      "Don't stendere il champagne come colore di sfondo esteso o su bordi/icone ovunque",
+      "Don't usare accent-deep (#8C6A35) per body text piccolo",
+      "Don't usare ombre nere dure come segnale di elevazione",
+      "Don't introdurre una seconda famiglia tipografica",
+      "Don't duplicare i valori hex del token champagne/nero altrove nel codice — riferire sempre le CSS custom properties"
+    ]
+  }
+}
