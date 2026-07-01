@@ -1,5 +1,3 @@
-import { CheckCircle2 } from "lucide-react";
-
 import { SectionHeading } from "@/components/section-heading";
 import { FadeIn } from "@/components/fade-in";
 import { NovaryLogo } from "@/components/novary-logo";
@@ -17,7 +15,6 @@ export function AboutSection() {
       <div className="section-shell">
         <div className="grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:items-start">
           <SectionHeading
-            eyebrow="Studio"
             title="Un piccolo studio digitale con standard da prodotto premium."
           >
             Novary sviluppa esperienze digitali moderne per aziende, brand e
@@ -39,16 +36,12 @@ export function AboutSection() {
           </FadeIn>
         </div>
 
-        <div className="mt-12 grid gap-4 md:grid-cols-2">
+        <div className="mt-12 grid gap-px bg-white/[0.06] md:grid-cols-2">
           {principles.map((principle) => (
             <FadeIn
               key={principle}
-              className="flex gap-4 rounded-lg border border-white/10 bg-white/[0.028] p-5 transition-colors hover:border-primary/25 hover:bg-white/[0.05]"
+              className="border-l-2 border-primary/30 bg-background px-6 py-5 transition-[border-color,background-color] duration-200 ease-out-expo hover:border-primary/60 hover:bg-white/[0.02]"
             >
-              <CheckCircle2
-                aria-hidden="true"
-                className="mt-0.5 h-5 w-5 flex-none text-primary"
-              />
               <p className="text-sm leading-6 text-muted-foreground">
                 {principle}
               </p>

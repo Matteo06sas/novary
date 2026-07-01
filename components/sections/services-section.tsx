@@ -1,3 +1,5 @@
+"use client";
+
 import type { LucideIcon } from "lucide-react";
 import {
   Bot,
@@ -10,20 +12,12 @@ import {
 
 import { SectionHeading } from "@/components/section-heading";
 import { StaggerContainer, StaggerItem } from "@/components/fade-in";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
 
 type Service = {
   title: string;
   description: string;
   icon: LucideIcon;
   signal: string;
-  points: string[];
 };
 
 const services: Service[] = [
@@ -32,54 +26,48 @@ const services: Service[] = [
     description:
       "Presenze digitali veloci, autorevoli e progettate per trasformare la prima impressione in fiducia.",
     icon: Code2,
-    signal: "Identità",
-    points: ["Design su misura", "Copy chiaro", "Performance curate"]
+    signal: "Identità"
   },
   {
     title: "E-commerce",
     description:
       "Esperienze di acquisto eleganti, con cataloghi ordinati e percorsi semplici dal prodotto al contatto.",
     icon: ShoppingCart,
-    signal: "Vendita",
-    points: ["Catalogo leggibile", "Schede prodotto premium", "Carrello intuitivo"]
+    signal: "Vendita"
   },
   {
     title: "Landing page",
     description:
       "Pagine focalizzate su campagne, servizi o lanci, con gerarchia visiva e CTA senza attrito.",
     icon: LayoutTemplate,
-    signal: "Conversione",
-    points: ["Messaggio diretto", "Sezioni essenziali", "CTA visibili"]
+    signal: "Conversione"
   },
   {
     title: "Automazioni AI",
     description:
       "Flussi pratici per qualificare contatti, ridurre lavoro ripetitivo e accelerare le risposte.",
     icon: Bot,
-    signal: "Efficienza",
-    points: ["Qualifica lead", "Risposte assistite", "Processi più fluidi"]
+    signal: "Efficienza"
   },
   {
     title: "Manutenzione",
     description:
       "Supporto continuativo per mantenere il prodotto stabile, aggiornato e coerente con il brand.",
     icon: Wrench,
-    signal: "Continuità",
-    points: ["Controlli periodici", "Aggiornamenti", "Evoluzioni mirate"]
+    signal: "Continuità"
   },
   {
     title: "SEO tecnica",
     description:
       "Struttura, contenuti e velocità pensati per rendere il sito più leggibile anche dai motori di ricerca.",
     icon: SearchCheck,
-    signal: "Visibilità",
-    points: ["Struttura pulita", "Performance", "Indicizzazione"]
+    signal: "Visibilità"
   }
 ];
 
 export function ServicesSection() {
   return (
-    <section id="services" className="border-b border-white/10 bg-[#050506] py-28">
+    <section id="services" className="border-b border-white/10 bg-background py-28">
       <div className="section-shell">
         <SectionHeading
           eyebrow="Servizi"
@@ -90,41 +78,33 @@ export function ServicesSection() {
           cliente arriva sul sito.
         </SectionHeading>
 
-        <StaggerContainer className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => {
+        <StaggerContainer className="mt-14 divide-y divide-white/10 border-t border-white/10">
+          {services.map((service) => {
             const Icon = service.icon;
 
             return (
               <StaggerItem key={service.title}>
-                <Card className="group h-full overflow-hidden bg-white/[0.028] transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-white/[0.05] hover:shadow-[0_24px_80px_rgba(109,74,255,0.12)]">
-                  <CardHeader>
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-primary/25 bg-primary/10 text-primary">
-                        <Icon aria-hidden="true" className="h-5 w-5" />
-                      </div>
-                      <span className="text-xs font-medium text-muted-foreground">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
+                <div className="group grid items-center gap-x-8 gap-y-3 py-6 transition-colors duration-200 ease-out-expo hover:bg-white/[0.018] sm:py-7 lg:grid-cols-[1fr_2fr_auto]">
+                  {/* Icon + title */}
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-10 w-10 flex-none items-center justify-center rounded-lg border border-primary/20 bg-primary/[0.08] text-primary transition-[transform,border-color,background-color] duration-200 ease-out-expo group-hover:scale-105 group-hover:border-primary/35 group-hover:bg-primary/[0.14]">
+                      <Icon aria-hidden="true" className="h-[18px] w-[18px]" />
                     </div>
-                    <div>
-                      <p className="text-xs font-medium uppercase text-primary">
-                        {service.signal}
-                      </p>
-                      <CardTitle className="mt-2">{service.title}</CardTitle>
-                    </div>
-                    <CardDescription>{service.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="border-t border-white/10 pt-5">
-                    <ul className="space-y-3 text-sm text-muted-foreground">
-                      {service.points.map((point) => (
-                        <li key={point} className="flex items-center gap-3">
-                          <span className="h-1.5 w-1.5 rounded-sm bg-primary" />
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
+                    <span className="text-base font-semibold text-foreground">
+                      {service.title}
+                    </span>
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-sm leading-6 text-muted-foreground pl-14 lg:pl-0">
+                    {service.description}
+                  </p>
+
+                  {/* Signal tag */}
+                  <span className="ml-14 w-max rounded-md border border-primary/20 bg-primary/[0.07] px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.12em] text-primary transition-[border-color,background-color] duration-200 ease-out-expo group-hover:border-primary/35 group-hover:bg-primary/[0.14] lg:ml-0">
+                    {service.signal}
+                  </span>
+                </div>
               </StaggerItem>
             );
           })}

@@ -4,22 +4,33 @@
 
 @layer base {
   :root {
-    --background: 240 8% 3%;
-    --foreground: 0 0% 98%;
-    --card: 240 7% 6%;
-    --card-foreground: 0 0% 98%;
-    --primary: 252 100% 65%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 240 6% 12%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 5% 10%;
-    --muted-foreground: 240 5% 68%;
-    --accent: 252 100% 65%;
-    --accent-foreground: 0 0% 100%;
-    --border: 240 5% 16%;
-    --input: 240 5% 16%;
-    --ring: 252 100% 65%;
+    /* Brand tokens — RGB channels, consumed as rgb(var(--x) / <alpha>). */
+    --background: 10 10 11; /* #0A0A0B */
+    --foreground: 242 240 236; /* #F2F0EC text-primary */
+    --surface: 19 19 21; /* #131315 */
+    --surface-2: 28 28 31; /* #1C1C1F */
+    --card: 19 19 21;
+    --card-foreground: 242 240 236;
+    --primary: 201 166 107; /* #C9A66B champagne accent */
+    --primary-foreground: 10 10 11; /* dark ink on champagne */
+    --secondary: 28 28 31;
+    --secondary-foreground: 242 240 236;
+    --muted: 19 19 21;
+    --muted-foreground: 168 163 154; /* #A8A39A text-secondary */
+    --accent: 201 166 107;
+    --accent-foreground: 10 10 11;
+    --accent-hover: 224 198 138; /* #E0C68A */
+    --accent-deep: 140 106 53; /* #8C6A35 */
+    --border: 38 38 43; /* #26262B */
+    --input: 38 38 43;
+    --ring: 201 166 107;
+    --glow: 201 166 107; /* accent glow color */
     --radius: 0.5rem;
+
+    /* Easing system */
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
   }
 
   * {
@@ -32,19 +43,31 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family:
-      ui-sans-serif,
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      "Segoe UI",
-      sans-serif;
+    font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
+    font-optical-sizing: auto;
   }
 
   ::selection {
-    background: hsl(var(--primary) / 0.3);
-    color: hsl(var(--foreground));
+    background: rgb(var(--primary) / 0.3);
+    color: rgb(var(--foreground));
+  }
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -66,8 +89,25 @@
 
   .premium-glow {
     background:
-      radial-gradient(circle at 24% 18%, hsl(var(--primary) / 0.18), transparent 30%),
-      radial-gradient(circle at 80% 8%, rgba(255, 255, 255, 0.08), transparent 24%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 42%);
+      radial-gradient(ellipse 72% 52% at 18% 14%, rgb(var(--glow) / 0.2), transparent 55%),
+      radial-gradient(ellipse 42% 36% at 82% 6%, rgba(255, 255, 255, 0.06), transparent 40%),
+      radial-gradient(ellipse 50% 55% at 68% 88%, rgb(var(--glow) / 0.08), transparent 55%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 48%);
+  }
+
+  .text-shimmer {
+    background: linear-gradient(
+      110deg,
+      rgb(var(--foreground)) 0%,
+      rgb(var(--foreground)) 32%,
+      rgb(var(--primary) / 0.9) 50%,
+      rgb(var(--foreground)) 68%,
+      rgb(var(--foreground)) 100%
+    );
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4.5s linear infinite;
   }
 }

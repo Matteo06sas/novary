@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 120" role="img" aria-label="Novary">
+  <defs>
+    <linearGradient id="nw-word" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FAF9F6"/>
+      <stop offset="1" stop-color="#CFCBC2"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(10 10)" fill="none" stroke="url(#nw-word)" stroke-width="11" stroke-linecap="butt" stroke-linejoin="round">
+    <g transform="translate(0 0)"><path d="M0,100 V0 L72,100 V0"/></g>
+    <g transform="translate(112 0)"><ellipse cx="46" cy="50" rx="40" ry="49"/></g>
+    <g transform="translate(244 0)"><path d="M0,0 L42,100 L84,0"/></g>
+    <g transform="translate(368 0)"><path d="M0,100 L42,0 L84,100 M16,64 H68"/></g>
+    <g transform="translate(492 0)"><path d="M0,100 V0 H42 A24,24 0 0 1 42,48 H0 M24,48 L66,100"/></g>
+    <g transform="translate(600 0)"><path d="M0,0 L40,46 L80,0 M40,46 V100"/></g>
+  </g>
+</svg>

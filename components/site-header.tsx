@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 
 import { NovaryLogo } from "@/components/novary-logo";
@@ -13,6 +14,8 @@ const navigation = [
   { label: "Studio", href: "/#about" }
 ];
 
+const EASE_OUT = [0.23, 1, 0.32, 1];
+
 export function SiteHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -24,7 +27,7 @@ export function SiteHeader() {
           className="group flex items-center gap-3"
           aria-label="Homepage Novary"
         >
-          <span className="relative grid h-11 w-11 place-items-center rounded-lg border border-white/10 bg-white/[0.035] p-1.5 shadow-[0_0_34px_rgba(109,74,255,0.22)] transition-transform duration-300 group-hover:scale-[1.04]">
+          <span className="relative grid h-11 w-11 place-items-center rounded-lg border border-white/10 bg-white/[0.035] p-1.5 shadow-[0_0_34px_rgb(var(--glow)/0.22)] transition-transform duration-200 ease-out-expo group-hover:scale-[1.06] group-active:scale-[0.97]">
             <NovaryLogo
               variant="mark"
               className="h-full w-full rounded-md"
@@ -49,7 +52,7 @@ export function SiteHeader() {
             <a
               key={item.href}
               href={item.href}
-              className="rounded-full px-4 py-2 text-sm text-muted-foreground transition-all duration-200 hover:bg-white/[0.07] hover:text-foreground"
+              className="rounded-full px-4 py-2 text-sm text-muted-foreground transition-[background-color,color] duration-150 ease-out-expo hover:bg-white/[0.09] hover:text-foreground"
             >
               {item.label}
             </a>
@@ -74,49 +77,74 @@ export function SiteHeader() {
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
             aria-label={isMenuOpen ? "Chiudi menu" : "Apri menu"}
-            className="grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-white/[0.035] text-foreground transition-colors hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background md:hidden"
+            className="grid h-10 w-10 place-items-center rounded-lg border border-white/10 bg-white/[0.035] text-foreground transition-[background-color,transform] duration-150 ease-out-expo hover:bg-white/[0.08] active:scale-[0.93] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background md:hidden"
           >
-            {isMenuOpen ? (
-              <X aria-hidden="true" className="h-5 w-5" />
-            ) : (
-              <Menu aria-hidden="true" className="h-5 w-5" />
-            )}
+            <AnimatePresence mode="wait" initial={false}>
+              {isMenuOpen ? (
+                <motion.span
+                  key="close"
+                  initial={{ opacity: 0, rotate: -45, scale: 0.7 }}
+                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                  exit={{ opacity: 0, rotate: 45, scale: 0.7 }}
+                  transition={{ duration: 0.18, ease: EASE_OUT }}
+                >
+                  <X aria-hidden="true" className="h-5 w-5" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="menu"
+                  initial={{ opacity: 0, rotate: 45, scale: 0.7 }}
+                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                  exit={{ opacity: 0, rotate: -45, scale: 0.7 }}
+                  transition={{ duration: 0.18, ease: EASE_OUT }}
+                >
+                  <Menu aria-hidden="true" className="h-5 w-5" />
+                </motion.span>
+              )}
+            </AnimatePresence>
           </button>
         </div>
       </div>
 
-      {isMenuOpen ? (
-        <div
-          id="mobile-menu"
-          className="border-t border-white/[0.08] bg-background/95 px-4 pb-6 pt-4 backdrop-blur-2xl md:hidden"
-        >
-          <nav
-            className="flex flex-col gap-1"
-            aria-label="Navigazione mobile"
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            key="mobile-menu"
+            id="mobile-menu"
+            initial={{ opacity: 0, y: -6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.22, ease: EASE_OUT }}
+            className="border-t border-white/[0.08] bg-background/95 px-4 pb-6 pt-4 backdrop-blur-2xl md:hidden"
           >
-            {navigation.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={() => setIsMenuOpen(false)}
-                className="rounded-lg px-4 py-3 text-sm text-muted-foreground transition-colors hover:bg-white/[0.06] hover:text-foreground"
-              >
-                {item.label}
+            <nav
+              className="flex flex-col gap-1"
+              aria-label="Navigazione mobile"
+            >
+              {navigation.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="rounded-lg px-4 py-3 text-sm text-muted-foreground transition-[background-color,color] duration-150 ease-out-expo hover:bg-white/[0.06] hover:text-foreground"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+            <Button
+              asChild
+              size="lg"
+              className="mt-4 w-full bg-white text-black shadow-[0_0_34px_rgba(255,255,255,0.12)] hover:bg-white/90"
+            >
+              <a href="/consulenza" onClick={() => setIsMenuOpen(false)}>
+                Richiedi consulenza
+                <ArrowUpRight aria-hidden="true" />
               </a>
-            ))}
-          </nav>
-          <Button
-            asChild
-            size="lg"
-            className="mt-4 w-full bg-white text-black shadow-[0_0_34px_rgba(255,255,255,0.12)] hover:bg-white/90"
-          >
-            <a href="/consulenza" onClick={() => setIsMenuOpen(false)}>
-              Richiedi consulenza
-              <ArrowUpRight aria-hidden="true" />
-            </a>
-          </Button>
-        </div>
-      ) : null}
+            </Button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
